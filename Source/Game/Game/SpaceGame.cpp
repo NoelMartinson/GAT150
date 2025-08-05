@@ -152,7 +152,7 @@ bool SpaceGame::Initialize() {
             scoreText->Draw(renderer, 20, 20);
             
             livesText->Create(renderer, "Lives " + std::to_string(lives), fox::vec3{ 1,1,1 });
-            livesText->Draw(renderer, renderer.GetWidth() - 200, 20);
+            livesText->Draw(renderer, renderer.GetWidth() - 200.0f, 20.0f);
         }
 
 		fox::GetEngine().GetPS().Draw(fox::GetEngine().GetRenderer());

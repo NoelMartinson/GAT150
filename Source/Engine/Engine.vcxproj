@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -84,7 +84,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL3.lib;fmod_vc.lib</AdditionalDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Source\ThirdParty\fmod\core\lib\$(PlatformTarget);$(SolutionDir)Source\ThirdParty\SDL3\lib\$(PlatformTarget)</AdditionalLibraryDirectories>
@@ -106,7 +107,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL3.lib;fmod_vc.lib</AdditionalDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Source\ThirdParty\fmod\core\lib\$(PlatformTarget);$(SolutionDir)Source\ThirdParty\SDL3\lib\$(PlatformTarget)</AdditionalLibraryDirectories>
@@ -127,7 +129,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL3.lib;fmod_vc.lib</AdditionalDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Source\ThirdParty\fmod\core\lib\$(PlatformTarget);$(SolutionDir)Source\ThirdParty\SDL3\lib\$(PlatformTarget)</AdditionalLibraryDirectories>
@@ -150,7 +153,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>SDL3.lib;fmod_vc.lib</AdditionalDependencies>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
     </Lib>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)Source\ThirdParty\fmod\core\lib\$(PlatformTarget);$(SolutionDir)Source\ThirdParty\SDL3\lib\$(PlatformTarget)</AdditionalLibraryDirectories>
@@ -170,6 +174,7 @@
     <ClCompile Include="Renderer\ParticleSystem.cpp" />
     <ClCompile Include="Renderer\Renderer.cpp" />
     <ClCompile Include="Renderer\Text.cpp" />
+    <ClCompile Include="Renderer\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Audio\AudioSystem.h" />
@@ -191,6 +196,7 @@
     <ClInclude Include="Renderer\ParticleSystem.h" />
     <ClInclude Include="Renderer\Renderer.h" />
     <ClInclude Include="Renderer\Text.h" />
+    <ClInclude Include="Renderer\Texture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

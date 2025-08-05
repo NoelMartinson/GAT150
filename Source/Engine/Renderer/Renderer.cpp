@@ -72,4 +72,17 @@ namespace fox
     void Renderer::DrawPoint(float x1, float y1) {
         SDL_RenderPoint(renderer, x1, y1);
 	}
+    
+    void Renderer::DrawTexture(Texture* texture, float x, float y, float angle)  
+    {  
+        vec2 size = texture->GetSize();
+
+        SDL_FRect destRect;  
+        destRect.x = x;  
+        destRect.y = y;  
+        destRect.w = size.x; 
+        destRect.h = size.y;
+
+        SDL_RenderTexture(renderer, texture->texture, NULL, &destRect);  
+    }
 }
