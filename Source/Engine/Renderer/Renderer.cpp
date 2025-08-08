@@ -1,17 +1,18 @@
 #include <iostream>
 #include "Renderer.h"
+#include "Core/Logger.h"
 
 namespace fox
 {
     bool Renderer::Initialize() {
 
         if (!SDL_Init(SDL_INIT_VIDEO)) {
-            std::cerr << "SDL_Init Error: " << SDL_GetError() << std::endl;
+            Logger::Error("SDL_Init Error: {}", SDL_GetError());
             return false;
         }
 
         if (!TTF_Init()) {
-            std::cerr << "TTF_Init Error: " << SDL_GetError() << std::endl;
+            Logger::Error("TTF_Init Error: {}", SDL_GetError());       
             return false;
         }
 
@@ -24,15 +25,15 @@ namespace fox
 		m_height = height; 
 
         window = SDL_CreateWindow(name.c_str(), width, height, 0);
-        if (window == nullptr) {
-            std::cerr << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
+        if (window == nullptr) {            
+            Logger::Error("SDL_CreateWindow Error: {}", SDL_GetError());
             SDL_Quit();
             return false;
         }
 
         renderer = SDL_CreateRenderer(window, NULL);
         if (renderer == nullptr) {
-            std::cerr << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
+            Logger::Error("SDL_CreateRenderer Error: {}", SDL_GetError());            
             SDL_DestroyWindow(window);
             SDL_Quit();
             return false;
@@ -82,6 +83,18 @@ namespace fox
         destRect.y = y;  
         destRect.w = size.x; 
         destRect.h = size.y;
+
+        SDL_RenderTexture(renderer, texture->texture, NULL, &destRect);  
+    }
+    void Renderer::DrawTexture(Texture* texture, float x, float y, float scale, float angle)  
+    {  
+        vec2 size = texture->GetSize();  
+
+        SDL_FRect destRect;  
+        destRect.x = x;  
+        destRect.y = y;  
+        destRect.w = size.x * scale;  
+        destRect.h = size.y * scale;  
 
         SDL_RenderTexture(renderer, texture->texture, NULL, &destRect);  
     }

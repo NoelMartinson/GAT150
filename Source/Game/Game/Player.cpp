@@ -15,12 +15,12 @@
 
 void Player::Update(float dt){
 
-    fox::Particle particle;
+    /*fox::Particle particle;
     particle.position = transform.position;
     particle.velocity = fox::vec2{ fox::random::getReal(200.0f), fox::random::getReal(200.0f)};
 	particle.color = fox::vec3{ 1, 1, 1 };
 	particle.lifespan = 2.0f;
-	fox::GetEngine().GetPS().AddParticle(particle);
+	fox::GetEngine().GetPS().AddParticle(particle);*/
 
    
     float rotate = 0;

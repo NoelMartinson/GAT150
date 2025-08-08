@@ -1,4 +1,6 @@
 #pragma once
+#include "Resource/Resource.h"
+
 #include <SDL3_ttf/SDL_ttf.h>
 #include <string>
 #include <iostream>
@@ -7,7 +9,7 @@
 struct TTF_Font;
 namespace fox
 {
-	class Font {
+	class Font : public Resource {
 	public:
 		Font() = default;
 		~Font();

@@ -3,6 +3,7 @@
 #include "Renderer/Model.h" 
 #include "Renderer/Renderer.h"
 #include "Core/Random.h" 
+#include "Core/Logger.h"
 #include "Player.h"
 #include "Enemy.h"
 #include "Health.h"
@@ -12,6 +13,7 @@
 #include "Engine.h"
 #include "GameData.h"
 #include "Audio/AudioSystem.h"
+#include "Resource/ResourceManager.h"
 
 
 #include <vector>
@@ -20,11 +22,12 @@
 bool SpaceGame::Initialize() {
 
     m_scene = std::make_unique<fox::Scene>(this);
-	titleFont = std::make_shared<fox::Font>();
-	titleFont->Load("ArcadeClassic.ttf", 128);
 
-	uiFont = std::make_shared<fox::Font>();
-	uiFont->Load("ArcadeClassic.ttf", 48);
+	//titleFont = std::make_shared<fox::Font>();
+	//titleFont->Load("ArcadeClassic.ttf", 128);
+
+	//uiFont = std::make_shared<fox::Font>();
+	//uiFont->Load("ArcadeClassic.ttf", 48);
 
     fox::GetEngine().GetAudio().AddSound("music.wav", "music", true);
     fox::GetEngine().GetAudio().AddSound("enemy_death.wav", "edeath", false);
@@ -32,17 +35,35 @@ bool SpaceGame::Initialize() {
     fox::GetEngine().GetAudio().AddSound("game_over.wav", "game_over", false);
     fox::GetEngine().GetAudio().AddSound("health.wav", "health", false);
 
-
-    fox::GetEngine().GetAudio().PlaySound("music");
-
     musicChannel = fox::GetEngine().GetAudio().PlaySound("music");
-    musicChannel->setVolume(0.5f); // Lower music volume
+    musicChannel->setVolume(0.5f);
 
-    
+    auto titleFont = std::make_shared<fox::Font>();
+    if (titleFont->Load("ArcadeClassic.ttf", 128.0f)) {
+        titleText = std::make_unique<fox::Text>(titleFont);
+    }
+    else {
+        fox::Logger::Error("Failed to load title font.");
+        return false;
+    }
 
-    titleText = std::make_unique<fox::Text>(titleFont);
-    scoreText = std::make_unique<fox::Text>(uiFont);
-    livesText = std::make_unique<fox::Text>(uiFont);
+    auto scoreFont = std::make_shared<fox::Font>();
+    if (scoreFont->Load("ArcadeClassic.ttf", 48.0f)) {
+        scoreText = std::make_unique<fox::Text>(scoreFont);
+    }
+    else {
+        fox::Logger::Error("Failed to load score font.");
+        return false;
+    }
+
+    auto livesFont = std::make_shared<fox::Font>();
+    if (livesFont->Load("ArcadeClassic.ttf", 48.0f)) {
+        livesText = std::make_unique<fox::Text>(livesFont);
+    }
+    else {
+        fox::Logger::Error("Failed to load lives font.");
+        return false;
+    }
 
     return true;
 }
@@ -118,12 +139,17 @@ bool SpaceGame::Initialize() {
                     musicChannel->stop();
                 }
                 else {
+                    m_scene->RemoveAllActors();
                     gameState = GameState::StartRound;
                 }
             }
             break;
         case SpaceGame::GameState::GameOver:
+            if (fox::GetEngine().GetInput().GetKeyPressed(SDL_SCANCODE_SPACE)) {
+                gameState = GameState::StartGame;
+            }
             break;
+
         default:
             break;
         }
@@ -165,4 +191,3 @@ bool SpaceGame::Initialize() {
         fox::GetEngine().GetAudio().PlaySound("pdeath");
         gameStateTimer = 2;
     }
-    

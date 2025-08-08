@@ -42,7 +42,7 @@ namespace fox {
 
 	Particle* ParticleSystem::GetFreeParticle(){
 		for(auto& particle : particles) {
-			if (!particle.active == false) return &particle;
+			if (!particle.active) return &particle;
 			
 		}
 

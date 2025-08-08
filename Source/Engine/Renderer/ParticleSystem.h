@@ -9,9 +9,9 @@ namespace fox {
 		bool active{ false };
 		float lifespan{ 1 };
 
-		vec2 position;
-		vec2 velocity;
-		vec3 color;
+		vec2 position = vec2{ 0.0f, 0.0f };
+		vec2 velocity = vec2{ 0.0f, 0.0f };
+		vec3 color = vec3{ 1.0f, 1.0f, 1.0f };
 	};
 
 	class ParticleSystem {

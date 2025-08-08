@@ -1,13 +1,16 @@
 #include "AudioSystem.h"
 #include "../Core/StringHelper.h"
+#include "../Core/Logger.h"
 #include <iostream>
 #include <fmod_errors.h>
 #include <algorithm>
+#include <SDL3/SDL_error.h>
+#include <sstream>
 
 namespace fox {
 	bool AudioSystem::CheckFMODResult(FMOD_RESULT result) {
 		if (result != FMOD_OK) {
-			std::cerr << FMOD_ErrorString(result) << std::endl;
+			Logger::Error("{}", FMOD_ErrorString(result));
 			return false;
 		}
 		return true;
@@ -41,7 +44,7 @@ namespace fox {
 		std::transform(key.begin(), key.end(), key.begin(), [](unsigned char c) { return std::tolower(c); });
 
 		if (soundMap.find(key) != soundMap.end()) {
-			std::cerr << "Sound with name '" << key << "' already exists." << std::endl;
+			Logger::Error("Audio system {} already exists", key);
 			return false;
 		}
 
@@ -62,15 +65,12 @@ namespace fox {
 		std::transform(key.begin(), key.end(), key.begin(), [](unsigned char c) { return std::tolower(c); });
 
 		if (soundMap.find(key) == soundMap.end()) {
-			std::cerr << "Sound with name '" << key << "' not found." << std::endl;
+			Logger::Error("Audio system {} doesn't exist", key);
 			return nullptr;
 		}
 
 		FMOD::Channel* channel = nullptr;
 		audioSystem->playSound(soundMap[key], 0, false, &channel);
-		return channel;
-	}
-
-
-	
+		return channel;        
+	}			
 }

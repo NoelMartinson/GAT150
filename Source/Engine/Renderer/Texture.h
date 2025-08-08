@@ -1,13 +1,13 @@
 #pragma once
 #include "../Math/Vector2.h"
 #include "Renderer.h"
+#include "Resource/Resource.h"
+
 #include <SDL3/SDL.h>
 #include <string>
 
-
 namespace fox {
-	class Texture
-	{
+	class Texture : public Resource {
 	public:
 		Texture() = default;
 		~Texture();

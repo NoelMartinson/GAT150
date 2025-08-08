@@ -1,5 +1,11 @@
 #pragma once
 #include "Core/Time.h"
+#include "Core/Singleton.h"
+#include "Renderer/Renderer.h"
+#include "Audio/AudioSystem.h"
+#include "Input/InputSystem.h"
+#include "Renderer/ParticleSystem.h"
+
 #include <memory>
 
 namespace fox {
@@ -8,10 +14,8 @@ namespace fox {
 	class InputSystem;
 	class ParticleSystem;
 
-	class Engine {
-	public:
-		Engine() = default;
-
+	class Engine : public Singleton<Engine> {
+	public:		
 		bool Initialize();
 		void Shutdown();
 
@@ -26,6 +30,9 @@ namespace fox {
 		Time& GetTime() { return m_time; }
 
 	private:
+		friend class Singleton<Engine>;
+		Engine() = default;
+	private:
 		Time m_time;
 
 		std::unique_ptr<Renderer> m_renderer;
@@ -34,5 +41,5 @@ namespace fox {
 		std::unique_ptr<ParticleSystem> m_particleSystem;
 	};
 
-	Engine& GetEngine();
+	inline Engine& GetEngine() { return Engine::Instance(); }
 }

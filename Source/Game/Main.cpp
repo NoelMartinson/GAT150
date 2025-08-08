@@ -15,6 +15,7 @@
 #include "Renderer/Font.h"
 #include "Core/File.h"
 #include "Renderer/Texture.h"
+#include "Resource/ResourceManager.h"
 
 #include "Game/Player.h"
 #include "Game/SpaceGame.h"
@@ -35,6 +36,7 @@ int main(int argc, char* argv[]) {
 
 	// Load a sound file
 	     
+    auto texture = fox::Resources().Get<fox::Texture>("Textures/blue_04.png", fox::GetEngine().GetRenderer());
 
     // Create stars
 	std::vector<fox::vec2> stars;
@@ -46,9 +48,7 @@ int main(int argc, char* argv[]) {
 	fox::Font* font = new fox::Font();
     font->Load("arcadeclassic.ttf", 20);
 
-    // create texture, using shared_ptr so texture can be shared
-    std::shared_ptr<fox::Texture> texture = std::make_shared<fox::Texture>();
-    texture->Load("foodery.png", fox::GetEngine().GetRenderer());
+    
 
     SDL_Event e;
     bool quit = false;
@@ -78,7 +78,6 @@ int main(int argc, char* argv[]) {
         fox::vec3 color{ 0,0,0 };
         fox::GetEngine().GetRenderer().SetColor(color.r, color.g, color.b);
         fox::GetEngine().GetRenderer().Clear();
-        fox::GetEngine().GetRenderer().DrawTexture(texture.get(), 1, 1);
 
         game->Draw(fox::GetEngine().GetRenderer());
 		

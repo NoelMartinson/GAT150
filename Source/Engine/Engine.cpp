@@ -5,11 +5,6 @@
 #include "Renderer/ParticleSystem.h"
 
 namespace fox {
-	Engine& GetEngine()
-	{
-		static Engine engine;
-		return engine;
-	}
 
 	bool Engine::Initialize() {
 		m_renderer = std::make_unique<fox::Renderer>();

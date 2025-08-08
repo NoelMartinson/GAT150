@@ -1,10 +1,13 @@
 #include "Texture.h"
+#include "Renderer.h"
+#include "Resource/Resource.h"
+#include "Core/Logger.h"
 #include <iostream>
 
 fox::Texture::~Texture()
 {
     // if texture exists, destroy texture
-    if (texture != NULL) SDL_DestroyTexture(texture);
+    if (texture != nullptr) SDL_DestroyTexture(texture);
 }
 
 bool fox::Texture::Load(const std::string& filename, Renderer& renderer)  
@@ -13,7 +16,7 @@ bool fox::Texture::Load(const std::string& filename, Renderer& renderer)
     SDL_Surface* surface = IMG_Load(filename.c_str());  
     if (surface == NULL)  
     {  
-        std::cerr << "Could not load image: " << filename << std::endl;  
+        Logger::Error("Could not load image: {}", SDL_GetError());       
         return false;  
     }  
 
@@ -23,7 +26,7 @@ bool fox::Texture::Load(const std::string& filename, Renderer& renderer)
     SDL_DestroySurface(surface);  
     if (texture == NULL)  
     {  
-        std::cerr << "Could not create texture: " << filename << std::endl;  
+        Logger::Error("Could not create texture: {}", filename); // Fixed 'fileName' to 'filename'
         return false;  
     }  
 
@@ -31,9 +34,7 @@ bool fox::Texture::Load(const std::string& filename, Renderer& renderer)
 }
 
 fox::vec2 fox::Texture::GetSize()  
-{  
-    if (texture == nullptr) return fox::vec2{ 0, 0 };  
-
+{   
     float width, height;  
     SDL_GetTextureSize(texture, &width, &height);  
     return fox::vec2{ width, height };  
