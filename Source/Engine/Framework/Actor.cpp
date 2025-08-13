@@ -1,5 +1,5 @@
 #include "Actor.h"
-#include "../Renderer/Model.h"
+#include "Renderer/Renderer.h"
 
 namespace fox {
 	void fox::Actor::Update(float dt) {
@@ -16,11 +16,11 @@ namespace fox {
 
 	void fox::Actor::Draw(Renderer& renderer) {
 		if (destroyed) return;
-		model->Draw(renderer, transform);
+		renderer.DrawTexture(texture.get() , transform.position.x, transform.position.y, transform.rotation, transform.scale);
 	}
 
 	float Actor::GetRadius()
 	{
-		return (model) ? model->GetRadius() * transform.scale: 0;
+		return (texture) ? (texture->GetSize().Length() * 0.5f) * transform.scale * 0.9f : 0;
 	}
 }

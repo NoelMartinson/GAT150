@@ -48,7 +48,7 @@ namespace fox {
 
         //load resource
         res_t<T> resource = std::make_shared<T>();
-        if (resource->Load(key, std::forward<Args>(args)...) == false) {
+        if (resource->Load(name, std::forward<Args>(args)...) == false) {
             Logger::Error("Failed to load resource:", SDL_GetError());
             return res_t<T>();
         }

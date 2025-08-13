@@ -35,11 +35,9 @@ int main(int argc, char* argv[]) {
 	game->Initialize();
 
 	// Load a sound file
-	     
-    auto texture = fox::Resources().Get<fox::Texture>("Textures/blue_04.png", fox::GetEngine().GetRenderer());
-
+	    
     // Create stars
-	std::vector<fox::vec2> stars;
+	std::vector<fox::vec2> stars; 
     for (int i = 0; i < 100; i++) {
         stars.push_back(fox::vec2{ fox::random::getReal() * 1280, fox::random::getReal() * 1024 });
     }
@@ -48,7 +46,11 @@ int main(int argc, char* argv[]) {
 	fox::Font* font = new fox::Font();
     font->Load("arcadeclassic.ttf", 20);
 
-    
+    auto background = fox::Resources().Get<fox::Texture>("Textures/space-was-cool.png", fox::GetEngine().GetRenderer());
+
+    float screenW = (float)fox::GetEngine().GetRenderer().GetWidth();
+    float screenH = (float)fox::GetEngine().GetRenderer().GetHeight();
+
 
     SDL_Event e;
     bool quit = false;
@@ -70,16 +72,18 @@ int main(int argc, char* argv[]) {
         fox::GetEngine().GetInput().Update();
         fox::GetEngine().GetAudio().Update();
 
-        /////////////////////////////////
-        
-        //Escape Key
+        /////////////////////////////////      
 
-        // draw
+        // draw Startup
         fox::vec3 color{ 0,0,0 };
         fox::GetEngine().GetRenderer().SetColor(color.r, color.g, color.b);
-        fox::GetEngine().GetRenderer().Clear();
+        fox::GetEngine().GetRenderer().Clear();        
 
+        fox::GetEngine().GetRenderer().DrawTexture(background.get(), 0, 0, screenW, screenH);
+
+        // draw Game
         game->Draw(fox::GetEngine().GetRenderer());
+        
 		
 
        ///////////////////////////////////

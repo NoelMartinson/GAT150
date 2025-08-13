@@ -1,4 +1,5 @@
 #pragma once  
+#include "Renderer/Texture.h"
 #include "../Math/Transform.h"  
 #include "../Renderer/Model.h"  
 #include <memory>  
@@ -20,9 +21,9 @@ namespace fox {
 		class Scene* scene{ nullptr };
 	public:  
 		Actor() = default;  
-		Actor(const fox::Transform& transform, std::shared_ptr<class Model> model) :
+		Actor(const fox::Transform& transform, res_t<Texture> texture) :
 			transform(transform),  
-			model{ model }  
+			texture{ texture }  
 		{}  
 
 		virtual void Update(float dt);  
@@ -33,6 +34,7 @@ namespace fox {
 		float GetRadius();
 
 	protected:  
-		std::shared_ptr<Model> model;
+		res_t<Texture> texture;
+		//std::shared_ptr<Model> model;
 	};  
 }

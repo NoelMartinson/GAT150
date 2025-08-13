@@ -44,9 +44,9 @@ void Player::Update(float dt){
         fireTimer = fireTime;
         fox::GetEngine().GetAudio().PlaySound("rocket");
         
-        std::shared_ptr<fox::Model>model = std::make_shared < fox::Model>(GameData::rocketPoints, fox::vec3{ 1,0,1 });
-        fox::Transform transform{this->transform.position, this->transform.rotation, 2.0f};
-        auto rocket = std::make_unique<Rocket>(transform, model);
+        
+        fox::Transform transform{this->transform.position, this->transform.rotation, 1.0f};
+        auto rocket = std::make_unique<Rocket>(transform, fox::Resources().Get<fox::Texture>("textures/missile-2.png", fox::GetEngine().GetRenderer()));
         rocket->speed = 1500.0f;
         rocket->lifespan = 1.5f;
         rocket->tag = "player";
@@ -55,7 +55,6 @@ void Player::Update(float dt){
 
         scene->AddActor(std::move(rocket));
     }
-
 	Actor::Update(dt);
 }
 

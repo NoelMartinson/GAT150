@@ -27,7 +27,8 @@ namespace fox {
 		int GetHeight() const { return m_height; }  
 
 		void DrawTexture(class Texture* texture, float x, float y, float angle = 0.0f);
-		void DrawTexture(class Texture* texture, float x, float y, float scale, float angle = 0.0f);
+        void DrawTexture(class Texture* texture, float x, float y, float angle = 0.0f, float scale = 0.1f);
+        void DrawTextureBG(class Texture* texture, float x, float y, float angle = 0.0f);
 	private:  
 		friend class Text;  
 		friend class Texture;  

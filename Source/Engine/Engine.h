@@ -5,15 +5,11 @@
 #include "Audio/AudioSystem.h"
 #include "Input/InputSystem.h"
 #include "Renderer/ParticleSystem.h"
+#include "Resource/ResourceManager.h"
 
 #include <memory>
 
 namespace fox {
-	class Renderer;
-	class AudioSystem;
-	class InputSystem;
-	class ParticleSystem;
-
 	class Engine : public Singleton<Engine> {
 	public:		
 		bool Initialize();

@@ -86,16 +86,21 @@ namespace fox
 
         SDL_RenderTexture(renderer, texture->texture, NULL, &destRect);  
     }
-    void Renderer::DrawTexture(Texture* texture, float x, float y, float scale, float angle)  
+    void Renderer::DrawTexture(Texture* texture, float x, float y, float angle, float scale)
     {  
         vec2 size = texture->GetSize();  
 
-        SDL_FRect destRect;  
-        destRect.x = x;  
-        destRect.y = y;  
-        destRect.w = size.x * scale;  
-        destRect.h = size.y * scale;  
+        SDL_FRect destRect;
+        destRect.w = size.x * scale;
+        destRect.h = size.y * scale;
+        destRect.x = x - (destRect.w * 0.5f);
+        destRect.y = y - (destRect.h * 0.5f);
 
-        SDL_RenderTexture(renderer, texture->texture, NULL, &destRect);  
+        SDL_RenderTextureRotated(renderer, texture->texture, NULL, &destRect, angle, NULL, SDL_FLIP_NONE);  
+    }
+    void Renderer::DrawTextureBG(Texture* texture, float x, float y, float angle)
+    {
+        SDL_FRect dest{ x, y, m_width, m_height };
+        SDL_RenderTextureRotated(renderer, texture->texture, nullptr, &dest, angle, nullptr, SDL_FLIP_NONE);
     }
 }

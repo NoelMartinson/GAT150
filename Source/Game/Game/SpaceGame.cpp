@@ -21,6 +21,11 @@
 
 bool SpaceGame::Initialize() {
 
+    auto DrawBackground = [&](fox::Texture* tex) {
+        fox::GetEngine().GetRenderer().DrawTexture(tex, screenW * 0.5f, screenH * 0.5f, 0, finalScale);
+        };
+
+
     m_scene = std::make_unique<fox::Scene>(this);
 
 	//titleFont = std::make_shared<fox::Font>();
@@ -88,9 +93,8 @@ bool SpaceGame::Initialize() {
         case SpaceGame::GameState::StartRound:
         {
             // Player
-            std::shared_ptr<fox::Model>model = std::make_shared < fox::Model>(GameData::playerPoints, fox::vec3{ 1,1,1 });
-            fox::Transform transform{ fox::vec2{ fox::GetEngine().GetRenderer().GetWidth() * 0.5f, fox::GetEngine().GetRenderer().GetHeight() * 0.5f}, 0, 5 };
-            auto player = std::make_unique<Player>(transform, model);
+            fox::Transform transform{ fox::vec2{ fox::GetEngine().GetRenderer().GetWidth() * 0.5f, fox::GetEngine().GetRenderer().GetHeight() * 0.5f}, 0, 2 };
+            auto player = std::make_unique<Player>(transform, fox::Resources().Get<fox::Texture>("textures/blue_04.png", fox::GetEngine().GetRenderer()));
             player->speed = 1500.0f;
             player->rotateRate = 180.0f;
             player->dampening = 1.5f;
@@ -106,24 +110,22 @@ bool SpaceGame::Initialize() {
 			enemySpawnTimer -= dt;
             if (enemySpawnTimer <= 0) {
 				enemySpawnTimer = 4;
+                    
+                fox::Transform transform{ fox::vec2{fox::random::getReal() * 1280, fox::random::getReal() * 1024 }, 0, 2 };
+                std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform, fox::Resources().Get<fox::Texture>("textures/tankbase_02.png", fox::GetEngine().GetRenderer()));
+                enemy->dampening = 1.5f;
+                enemy->speed = (fox::random::getReal() * 1000) + 500;
+                enemy->tag = "enemy";                    
 
-                std::shared_ptr<fox::Model>enemyModel = std::make_shared < fox::Model>(GameData::enemyPoints, fox::vec3{ 1,1,0 });              
-                    fox::Transform transform{ fox::vec2{fox::random::getReal() * 1280, fox::random::getReal() * 1024 }, 0, 5 };
-                    std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform, enemyModel);
-                    enemy->dampening = 1.5f;
-                    enemy->speed = (fox::random::getReal() * 1000) + 500;
-                    enemy->tag = "enemy";                    
-
-                    m_scene->AddActor(std::move(enemy));
+                m_scene->AddActor(std::move(enemy));
             }
 
 			healthSpawnTimer -= dt;
             if (healthSpawnTimer <= 0) {
 				healthSpawnTimer = 30;
-
-                std::shared_ptr<fox::Model>healthModel = std::make_shared < fox::Model>(GameData::healthPoints, fox::vec3{ 1,1,0 });              
-                    fox::Transform transform{ fox::vec2{fox::random::getReal() * 1280, fox::random::getReal() * 1024 }, 0, 5 };
-                    std::unique_ptr<Health> health = std::make_unique<Health>(transform, healthModel);
+                                       
+                    fox::Transform transform{ fox::vec2{fox::random::getReal() * 1280, fox::random::getReal() * 1024 }, 0, 0.5 };
+                    std::unique_ptr<Health> health = std::make_unique<Health>(transform, fox::Resources().Get<fox::Texture>("textures/heart.png", fox::GetEngine().GetRenderer()));
                     health->tag = "health";
 
                     m_scene->AddActor(std::move(health));
@@ -174,6 +176,22 @@ bool SpaceGame::Initialize() {
 		}
 
         if (gameState == GameState::Game) {
+            auto texture = fox::Resources().Get<fox::Texture>("Textures/space-was-cool.png", fox::GetEngine().GetRenderer());
+
+            float screenW = (float)fox::GetEngine().GetRenderer().GetWidth();
+            float screenH = (float)fox::GetEngine().GetRenderer().GetHeight();
+            float texW = (float)texture->GetSize().x;
+            float texH = (float)texture->GetSize().y;
+
+            // Compute scale to fill the screen
+            float scaleX = screenW / texW;
+            float scaleY = screenH / texH;
+            float finalScale = (scaleX > scaleY) ? scaleX : scaleY; // Cover entire screen
+
+            // Draw centered with no rotation
+            fox::GetEngine().GetRenderer().DrawTexture(texture.get(), screenW * 0.5f, screenH * 0.5f, 0, finalScale);
+
+
             scoreText->Create(renderer, "Score " + std::to_string(score), fox::vec3{ 1,1,1 });
             scoreText->Draw(renderer, 20, 20);
             
