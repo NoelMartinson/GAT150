@@ -11,8 +11,8 @@ public:
 	
 public:
 	Player() = default;
-	Player(const fox::Transform& transform, fox::res_t<fox::Texture> texture) :
-		Actor{ transform, texture }
+	Player(const fox::Transform& transform) :
+		Actor{ transform }
 	{};
 
 	void Initialize();

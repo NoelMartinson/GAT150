@@ -9,7 +9,5 @@ namespace fox {
 	public:
 		void Update(float dt) override;
 		void Draw(Renderer& renderer) override;
-
-
 	};
 }

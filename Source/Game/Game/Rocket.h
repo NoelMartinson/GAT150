@@ -6,8 +6,8 @@ public:
 	float speed = 200;
 public:
 	Rocket() = default;
-	Rocket(const fox::Transform& transform, fox::res_t<fox::Texture> texture) :
-		Actor{ transform, texture }
+	Rocket(const fox::Transform& transform) :
+		Actor{ transform }
 	{
 	}
 

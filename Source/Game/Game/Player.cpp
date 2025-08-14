@@ -2,16 +2,8 @@
 #include "Engine.h"
 #include "Rocket.h"
 #include "SpaceGame.h"
-#include "Renderer/Renderer.h" 
-#include "Renderer/ParticleSystem.h"
-#include "Core/Random.h"
-#include "Renderer/Model.h"
-#include "Input/InputSystem.h"
-#include "Framework/Scene.h"    
 #include "GameData.h"
-#include "Audio/AudioSystem.h"
-
-#include <iostream>
+#include "../GamePCH.h"
 
 void Player::Update(float dt){
 
@@ -34,7 +26,12 @@ void Player::Update(float dt){
 
     fox::vec2 direction{ 1, 0 };
 	fox::vec2 force = direction.Rotate(fox::math::degToRad(transform.rotation)) * thrust * speed;
-    velocity += force * dt;
+    //velocity += force * dt;
+
+    auto rb = GetComponent<fox::RigidBody>();
+    if (rb) {
+        rb->velocity += force * dt;
+    }
 
 	transform.position.x = fox::math::wrap(transform.position.x, 0.0f, (float)fox::GetEngine().GetRenderer().GetWidth());
     transform.position.y = fox::math::wrap(transform.position.y, 0.0f, (float)fox::GetEngine().GetRenderer().GetHeight());
@@ -43,15 +40,29 @@ void Player::Update(float dt){
     if (fox::GetEngine().GetInput().GetKeyDown(SDL_SCANCODE_SPACE) && fireTimer <= 0) {
         fireTimer = fireTime;
         fox::GetEngine().GetAudio().PlaySound("rocket");
+
+
+
         
         
         fox::Transform transform{this->transform.position, this->transform.rotation, 1.0f};
-        auto rocket = std::make_unique<Rocket>(transform, fox::Resources().Get<fox::Texture>("textures/missile-2.png", fox::GetEngine().GetRenderer()));
+        auto rocket = std::make_unique<Rocket>(transform);
         rocket->speed = 1500.0f;
         rocket->lifespan = 1.5f;
         rocket->tag = "player";
         rocket->name = "rocket";
 
+        //Compoents
+        auto spriteRenderer = std::make_unique<fox::SpriteRenderer>();
+        spriteRenderer->textureName = "textures/missile-2.png";
+        rocket->AddComponent(std::move(spriteRenderer));
+
+        auto rb = std::make_unique<fox::RigidBody>();
+        rocket->AddComponent(std::move(rb));
+
+        auto collider = std::make_unique<fox::CircleCollider2D>();
+        collider->radius = 10;
+        rocket->AddComponent(std::move(collider));
 
         scene->AddActor(std::move(rocket));
     }

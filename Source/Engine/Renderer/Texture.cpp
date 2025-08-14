@@ -1,8 +1,5 @@
 #include "Texture.h"
 #include "Renderer.h"
-#include "Resource/Resource.h"
-#include "Core/Logger.h"
-#include <iostream>
 
 fox::Texture::~Texture()
 {

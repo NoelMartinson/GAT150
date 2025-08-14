@@ -1,26 +1,44 @@
 #include "Actor.h"
+#include "Components/RendererComponent.h"
 #include "Renderer/Renderer.h"
 
 namespace fox {
 	void fox::Actor::Update(float dt) {
 		if (destroyed) return;
 
-		if (lifespan != 0) {
+
+
+		if (lifespan > 0) {
 			lifespan -= dt;
-			destroyed = lifespan <= 0;
+			if(lifespan <= 0) {
+				destroyed = true;
+				return;
+			}
 		}
 
-		transform.position += velocity * dt;
-		velocity *= (1.0f / (1.0f + dampening * dt));
+		for (auto& component : components) {
+			if (component->active) {
+				component->Update(dt);
+			}
+		}		
 	}
-
+	 
 	void fox::Actor::Draw(Renderer& renderer) {
 		if (destroyed) return;
-		renderer.DrawTexture(texture.get() , transform.position.x, transform.position.y, transform.rotation, transform.scale);
+
+		for (auto& component : components) {
+			if (component->active) {
+				auto rendererComponent = dynamic_cast<RendererComponent*>(component.get());
+				if (rendererComponent) {
+					rendererComponent->Draw(renderer);
+				}
+			}
+		}
 	}
 
-	float Actor::GetRadius()
+	void Actor::AddComponent(std::unique_ptr<class Component> component)
 	{
-		return (texture) ? (texture->GetSize().Length() * 0.5f) * transform.scale * 0.9f : 0;
+		component->owner = this;
+		components.push_back(std::move(component));
 	}
 }

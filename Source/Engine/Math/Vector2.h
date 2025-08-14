@@ -63,6 +63,40 @@ namespace fox {
 		}
 	};
 
+	template<typename T>
+	std::ostream& operator << (std::ostream& stream, const Vector2<T> v) {
+		stream << "Vector2(" << v.x << ", " << v.y << ")";
+		return stream;
+	}
+
+	template<typename T>
+	std::istream& operator >> (std::istream& stream, Vector2<T>& v) {
+		char discard = '\0';
+
+		if (!(stream >> std::ws >> discard) || discard != '{') {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		}
+		if (!(stream >> std::ws >> v.x)) {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		}
+		if (!(stream >> std::ws >> discard) || discard != ',') {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		}
+		if (!(stream >> std::ws >> v.y)) {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		}
+		if (!(stream >> std::ws >> discard) || discard != '}') {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		}
+
+		return stream;
+	}
+
 	using ivec2 = Vector2<int>;
 	using vec2 = Vector2<float>;
 }

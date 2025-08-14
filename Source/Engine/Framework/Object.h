@@ -1,14 +1,14 @@
 #pragma once
 
-namespace fox
-{
+namespace fox {
 	class Object {
 	public:
 		std::string name;
-		bool active{ false };
+		bool active{ true };
 
 
-	private:
-
+	protected:
+		Object() = default;
+		virtual ~Object() = default;
 	};
-}
+}	

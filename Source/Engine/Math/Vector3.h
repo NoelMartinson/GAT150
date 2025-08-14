@@ -50,6 +50,48 @@ namespace fox {
 		float Length() { return fox::math::sqrtf(LengthSquare()); }
 	};
 
+	template<typename T>
+	std::ostream& operator << (std::ostream& stream, const Vector3<T> v) {
+		stream << "Vector3(" << v.x << ", " << v.y << ", " << v.z << ")";
+		return stream;
+	}
+
+	template<typename T>
+	std::istream& operator >> (std::istream& stream, Vector3<T>& v) {
+		char discard = '\0';
+
+		if (!(stream >> std::ws >> discard) || discard != '{') {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		}
+		if (!(stream >> std::ws >> v.x)) {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		}
+		if (!(stream >> std::ws >> discard) || discard != ',') {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		}
+		if (!(stream >> std::ws >> v.y)) {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		}
+		if (!(stream >> std::ws >> discard) || discard != ',') {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		}
+		if (!(stream >> std::ws >> v.z)) {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		}
+		if (!(stream >> std::ws >> discard) || discard != '}') {
+			stream.setstate(std::ios::failbit);
+			return stream;
+		}
+
+		return stream;
+	}
+
 	using ivec3 = Vector3<int>;
 	using vec3 = Vector3<float>;
 }

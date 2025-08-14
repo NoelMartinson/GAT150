@@ -1,5 +1,4 @@
 #include "Text.h"
-#include "Core/Logger.h"
 
 fox::Text::~Text() {
 	if (m_texture != nullptr) {

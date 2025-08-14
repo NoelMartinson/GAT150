@@ -1,18 +1,17 @@
 #pragma once  
 #include "Renderer/Texture.h"
-#include "../Math/Transform.h"  
-#include "../Renderer/Model.h"  
+#include "Object.h"
+#include "Component.h"
+#include "Math/Transform.h"  
+#include "Renderer/Mesh.h"  
 #include <memory>  
 #include <string>
+#include <vector>
 
 namespace fox {  
-	class Actor {  
+	class Actor : public Object {  
 	public:
-		std::string name;
 		std::string tag;
-
-		vec2 velocity{ 0, 0 };
-		float dampening{ 0.0f };
 
 		bool destroyed{ false };
 		float lifespan{ 0 };
@@ -21,9 +20,8 @@ namespace fox {
 		class Scene* scene{ nullptr };
 	public:  
 		Actor() = default;  
-		Actor(const fox::Transform& transform, res_t<Texture> texture) :
-			transform(transform),  
-			texture{ texture }  
+		Actor(const fox::Transform& transform) :
+			transform(transform)
 		{}  
 
 		virtual void Update(float dt);  
@@ -31,10 +29,44 @@ namespace fox {
 
 		virtual void OnCollision(Actor* other) = 0;
 
-		float GetRadius();
+		//
+		void AddComponent(std::unique_ptr<Component> component);
+
+		template<typename T>
+		T* GetComponent();
+
+		template<typename T>
+		std::vector<T*> GetComponents();
+
+
 
 	protected:  
-		res_t<Texture> texture;
-		//std::shared_ptr<Model> model;
+		std::vector<std::unique_ptr<Component>> components;
 	};  
+
+	template<typename T>
+	inline T* Actor::GetComponent()
+	{
+		for (auto& component : components) {
+			auto result = dynamic_cast<T*>(component.get());
+			if (result) {
+				return result;
+			}
+		}
+		return nullptr;
+	}
+
+	template<typename T>
+	inline std::vector<T*> Actor::GetComponents()
+	{
+		std::vector<T*> results;
+
+		for (auto& component : components) {
+			auto result = dynamic_cast<T*>(component.get());
+			if (result) {
+				results.push_back(result);
+			}
+		}
+		return results;
+	}
 }

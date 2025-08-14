@@ -2,15 +2,17 @@
 #include "Object.h"
 
 namespace fox {
-	class Component : public Object {
-	public:
-		class Actor* owner{ nullptr };
+    class Actor;
 
-	public:
-		Component() = default;
+    class Component : public Object {
+    public:
+        Actor* owner{ nullptr };
 
-		void Draw();
+        Component() = default;
+        virtual ~Component() = default;
 
-		virtual void Update(float dt) = 0;
-	};
+        void Draw();
+
+        virtual void Update(float dt) = 0;
+    };
 }

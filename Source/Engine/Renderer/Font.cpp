@@ -1,5 +1,4 @@
 #include "Font.h"
-#include "Core/Logger.h"
 
 fox::Font::~Font() {
 	if (m_ttfFont != nullptr) {

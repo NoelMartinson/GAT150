@@ -8,8 +8,8 @@ public:
 
 public:
 	Health() = default;
-	Health(const fox::Transform& transform, fox::res_t<fox::Texture> texture) :
-		Actor{ transform, texture }
+	Health(const fox::Transform& transform) :
+		Actor{ transform }
 	{
 	};
 

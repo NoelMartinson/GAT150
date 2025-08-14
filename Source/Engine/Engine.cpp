@@ -9,7 +9,7 @@ namespace fox {
 	bool Engine::Initialize() {
 		m_renderer = std::make_unique<fox::Renderer>();
 		m_renderer->Initialize();
-		m_renderer->CreateWindow("Fox Engine", 1280, 1024);
+		m_renderer->CreateWindow("Fox Engine", 1280, 1024, false);
 
 		m_input = std::make_unique<fox::InputSystem>();
 		m_input->Initialize();
@@ -25,6 +25,8 @@ namespace fox {
 	}
 
 	void Engine::Shutdown() {
+		Resources().Clear();
+
 		m_particleSystem->Shutdown();
 		m_audio->Shutdown();
 		m_input->Shutdown();

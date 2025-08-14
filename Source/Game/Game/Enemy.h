@@ -8,8 +8,8 @@ public:
 
 public:
 	Enemy() = default;
-	Enemy(const fox::Transform& transform, fox::res_t<fox::Texture> texture) :
-		Actor{ transform, texture }
+	Enemy(const fox::Transform& transform) :
+		Actor{ transform }
 	{
 	};
 

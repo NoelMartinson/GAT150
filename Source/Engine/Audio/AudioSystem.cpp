@@ -1,11 +1,5 @@
 #include "AudioSystem.h"
-#include "../Core/StringHelper.h"
-#include "../Core/Logger.h"
-#include <iostream>
-#include <fmod_errors.h>
-#include <algorithm>
-#include <SDL3/SDL_error.h>
-#include <sstream>
+#include "AudioClip.h"
 
 namespace fox {
 	bool AudioSystem::CheckFMODResult(FMOD_RESULT result) {
@@ -72,5 +66,11 @@ namespace fox {
 		FMOD::Channel* channel = nullptr;
 		audioSystem->playSound(soundMap[key], 0, false, &channel);
 		return channel;        
-	}			
+	}
+	bool AudioSystem::PlaySound(AudioClip& audioclip)
+	{
+		FMOD_RESULT result = audioSystem->playSound(audioclip.sound, 0, false, nullptr);
+		if (!CheckFMODResult(result)) return false;
+		return true;
+	}
 }

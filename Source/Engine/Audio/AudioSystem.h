@@ -16,11 +16,14 @@ namespace fox {
 
 		bool AddSound(const std::string& filename, const std::string& name, bool loop);
 		FMOD::Channel* PlaySound(const std::string& name);
+		bool PlaySound(class AudioClip& audioclip);
 
 	private:
-		bool CheckFMODResult(FMOD_RESULT result);
+		static bool CheckFMODResult(FMOD_RESULT result);
 
 	private:
+		friend class AudioClip;
+
 		FMOD::System* audioSystem = nullptr;
 		std::map<std::string, FMOD::Sound*> soundMap;
 	};

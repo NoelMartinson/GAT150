@@ -1,6 +1,4 @@
-#include <iostream>
 #include "Renderer.h"
-#include "Core/Logger.h"
 
 namespace fox
 {
@@ -19,13 +17,13 @@ namespace fox
         return true;
     }
 
-    bool Renderer::CreateWindow(const std::string& name, int width, int height) {
+    bool Renderer::CreateWindow(const std::string& name, int width, int height, bool fullscreen) {
 
         m_width = width;
 		m_height = height; 
 
-        window = SDL_CreateWindow(name.c_str(), width, height, 0);
-        if (window == nullptr) {            
+        window = SDL_CreateWindow(name.c_str(), width, height, fullscreen ? SDL_WINDOW_FULLSCREEN: 0);
+        if (window == nullptr) {
             Logger::Error("SDL_CreateWindow Error: {}", SDL_GetError());
             SDL_Quit();
             return false;
@@ -38,6 +36,8 @@ namespace fox
             SDL_Quit();
             return false;
         }
+
+		//SDL_SetRenderLogicalPresentationSize(renderer, width, height, SDL_LOGICAL_PRESENTATION_LETTERBOX);
 
         return true;
     }
@@ -74,9 +74,10 @@ namespace fox
         SDL_RenderPoint(renderer, x1, y1);
 	}
     
-    void Renderer::DrawTexture(Texture* texture, float x, float y, float angle)  
+    void Renderer::DrawTexture(Texture& texture, float x, float y, float angle)  
     {  
-        vec2 size = texture->GetSize();
+       
+        vec2 size = texture.GetSize();
 
         SDL_FRect destRect;  
         destRect.x = x;  
@@ -84,11 +85,11 @@ namespace fox
         destRect.w = size.x; 
         destRect.h = size.y;
 
-        SDL_RenderTexture(renderer, texture->texture, NULL, &destRect);  
+        SDL_RenderTexture(renderer, texture.texture, NULL, &destRect);  
     }
-    void Renderer::DrawTexture(Texture* texture, float x, float y, float angle, float scale)
+    void Renderer::DrawTexture(Texture& texture, float x, float y, float angle, float scale)
     {  
-        vec2 size = texture->GetSize();  
+        vec2 size = texture.GetSize();  
 
         SDL_FRect destRect;
         destRect.w = size.x * scale;
@@ -96,11 +97,11 @@ namespace fox
         destRect.x = x - (destRect.w * 0.5f);
         destRect.y = y - (destRect.h * 0.5f);
 
-        SDL_RenderTextureRotated(renderer, texture->texture, NULL, &destRect, angle, NULL, SDL_FLIP_NONE);  
+        SDL_RenderTextureRotated(renderer, texture.texture, NULL, &destRect, angle, NULL, SDL_FLIP_NONE);  
     }
     void Renderer::DrawTextureBG(Texture* texture, float x, float y, float angle)
     {
-        SDL_FRect dest{ x, y, m_width, m_height };
+        SDL_FRect dest{ x, y, static_cast<float>(m_width), static_cast<float>(m_height) };
         SDL_RenderTextureRotated(renderer, texture->texture, nullptr, &dest, angle, nullptr, SDL_FLIP_NONE);
     }
 }

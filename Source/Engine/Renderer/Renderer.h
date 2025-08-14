@@ -12,7 +12,7 @@ namespace fox {
 
 		bool Initialize();  
 		void Shutdown();  
-		bool CreateWindow(const std::string& name, int width, int height);  
+		bool CreateWindow(const std::string& name, int width, int height, bool fullscreen = false);  
 
 		void Clear();  
 		void Present();  
@@ -26,8 +26,8 @@ namespace fox {
 		int GetWidth() const { return m_width; }  
 		int GetHeight() const { return m_height; }  
 
-		void DrawTexture(class Texture* texture, float x, float y, float angle = 0.0f);
-        void DrawTexture(class Texture* texture, float x, float y, float angle = 0.0f, float scale = 0.1f);
+		void DrawTexture(class Texture& texture, float x, float y, float angle = 0.0f);
+        void DrawTexture(class Texture& texture, float x, float y, float angle = 0.0f, float scale = 0.1f);
         void DrawTextureBG(class Texture* texture, float x, float y, float angle = 0.0f);
 	private:  
 		friend class Text;  

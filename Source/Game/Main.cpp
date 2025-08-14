@@ -1,33 +1,9 @@
-#include "Math/Math.h"
-#include "Math/Vector2.h"
-#include "Math/Vector3.h"
-#include "Math/Transform.h"
-#include "Core/Time.h"
-#include "Core/Random.h"
-#include "Renderer/Renderer.h"
-#include "Renderer/Model.h"
-#include "Input/InputSystem.h"
-#include "Audio/AudioSystem.h"
-#include "Framework/Actor.h"
-#include "Framework/Scene.h"
-#include "Engine.h"
-#include "Renderer/Text.h"
-#include "Renderer/Font.h"
-#include "Core/File.h"
-#include "Renderer/Texture.h"
-#include "Resource/ResourceManager.h"
-
-#include "Game/Player.h"
 #include "Game/SpaceGame.h"
-
-#include <iostream>
-#include <vector>
-#include <fmod.hpp>
-#include <memory>
 
 int main(int argc, char* argv[]) {
 
-	// Initize Engine   
+    // Initize Engine 
+	fox::Logger::Info("initialize engine");
     fox::GetEngine().Initialize();
 
     // Initialize Game
@@ -79,7 +55,7 @@ int main(int argc, char* argv[]) {
         fox::GetEngine().GetRenderer().SetColor(color.r, color.g, color.b);
         fox::GetEngine().GetRenderer().Clear();        
 
-        fox::GetEngine().GetRenderer().DrawTexture(background.get(), 0, 0, screenW, screenH);
+        fox::GetEngine().GetRenderer().DrawTextureBG(background.get(), 0, screenW, screenH);
 
         // draw Game
         game->Draw(fox::GetEngine().GetRenderer());

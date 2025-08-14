@@ -8,6 +8,9 @@
     <Filter Include="Source\Game">
       <UniqueIdentifier>{7ea9459c-80b8-4ef0-bca3-bad6a3c7497e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{f7366786-f814-4e24-b46e-f239b1fb3492}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -31,6 +34,9 @@
     <ClCompile Include="Game\Health.cpp">
       <Filter>Source\Game</Filter>
     </ClCompile>
+    <ClCompile Include="GamePCH.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Player.h">
@@ -51,5 +57,13 @@
     <ClInclude Include="Game\Health.h">
       <Filter>Source\Game</Filter>
     </ClInclude>
+    <ClInclude Include="GamePCH.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\Build\Mesh\enemy.txt">
+      <Filter>Assets</Filter>
+    </Text>
   </ItemGroup>
 </Project>

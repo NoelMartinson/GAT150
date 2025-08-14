@@ -1,12 +1,13 @@
 #include "Scene.h"
-#include "Actor.h"
 #include "../Renderer/Renderer.h"
-#include "../Core/StringHelper.h"
+#include "Components/ColliderComponent.h"
 
 namespace fox {
-	void Scene::Update(float dt){
+	void Scene::Update(float dt){ 
 		for (auto& actor : actors) {
-			actor->Update(dt);
+			if (actor->active) {
+				actor->Update(dt);
+			}
 		}
 
 		for (auto iter = actors.begin(); iter != actors.end();) {
@@ -21,18 +22,24 @@ namespace fox {
 			for (auto& actorB : actors) {
 				if (actorA == actorB || (actorA->destroyed || actorA->destroyed)) continue;
 
-				float distance = (actorA->transform.position - actorB->transform.position).Length();
-				if (distance <= actorA->GetRadius() + actorB->GetRadius()) {
+				auto colliderA = actorA->GetComponent<ColliderComponent>();
+				auto colliderB = actorB->GetComponent<ColliderComponent>();
+
+				if (!colliderA || !colliderB) continue;
+
+				if (colliderA->CheckCollision(*colliderB)) {
 					actorA->OnCollision(actorB.get());
 					actorB->OnCollision(actorA.get());
-				}
+				}			
 			}
 		}
 	};
 
 	void Scene::Draw(Renderer& renderer) {
 		for (auto& actor : actors) {
-			actor->Draw(renderer);
+			if (actor->active) {
+				actor->Draw(renderer);
+			}
 		}
 	}
 	void Scene::AddActor(std::unique_ptr<class Actor> actor)

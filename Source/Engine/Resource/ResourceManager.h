@@ -11,6 +11,8 @@
 namespace fox {
     class ResourceManager : public Singleton<ResourceManager> {
     public:
+        void Clear() {resources.clear();}
+
         template<typename T, typename ... Args>
         res_t<T> Get(const std::string& name, Args&& ... args);
 

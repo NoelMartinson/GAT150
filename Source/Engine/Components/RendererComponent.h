@@ -1,5 +1,6 @@
 #pragma once
 #include "Framework/Component.h"
+#include "Renderer/Renderer.h"
 
 namespace fox {
 	class RendererComponent : public Component {

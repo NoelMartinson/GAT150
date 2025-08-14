@@ -27,7 +27,10 @@
     <Filter Include="Source\Framework">
       <UniqueIdentifier>{61cf61da-a41a-4cfa-a4a9-0f600205c0da}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Resources">
+    <Filter Include="Source\Components">
+      <UniqueIdentifier>{821a44d3-4740-44e5-8b11-23d36e21c119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Resource">
       <UniqueIdentifier>{86de6ead-a355-4fb5-bda5-96499b03c2d6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -44,7 +47,7 @@
     <ClCompile Include="Audio\AudioSystem.cpp">
       <Filter>Source\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\Model.cpp">
+    <ClCompile Include="Renderer\Mesh.cpp">
       <Filter>Source\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Core\Time.cpp">
@@ -73,6 +76,21 @@
     </ClCompile>
     <ClCompile Include="Renderer\Texture.cpp">
       <Filter>Source\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="EnginePCH.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\SpriteRenderer.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\RigidBody.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\CircleCollider2D.cpp">
+      <Filter>Source\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio\AudioClip.cpp">
+      <Filter>Source\Audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,7 +124,7 @@
     <ClInclude Include="Math\Vector3.h">
       <Filter>Source\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\Model.h">
+    <ClInclude Include="Renderer\Mesh.h">
       <Filter>Source\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Math\Transform.h">
@@ -137,16 +155,46 @@
       <Filter>Source\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Resource\Resource.h">
-      <Filter>Source\Resources</Filter>
+      <Filter>Source\Resource</Filter>
     </ClInclude>
     <ClInclude Include="Resource\ResourceManager.h">
-      <Filter>Source\Resources</Filter>
+      <Filter>Source\Resource</Filter>
     </ClInclude>
     <ClInclude Include="Core\Singleton.h">
       <Filter>Source\Core</Filter>
     </ClInclude>
     <ClInclude Include="Core\Logger.h">
       <Filter>Source\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineMinimal.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="EnginePCH.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\RendererComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\SpriteRenderer.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Object.h">
+      <Filter>Source\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework\Component.h">
+      <Filter>Source\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\RigidBody.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CircleCollider2D.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ColliderComponent.h">
+      <Filter>Source\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio\AudioClip.h">
+      <Filter>Source\Audio</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

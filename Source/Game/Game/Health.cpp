@@ -1,9 +1,7 @@
+#include "../GamePCH.h"
 #include "Health.h"
 #include "Engine.h"
-#include "Framework/Scene.h"
 #include "Player.h"
-#include "Framework/Game.h"
-#include "Audio/AudioSystem.h"
 
 void Health::Initialize()
 {
@@ -20,7 +18,8 @@ void Health::OnCollision(Actor* other)
     if (other->tag == "player" && other->name == "player") {
         destroyed = true;
         scene->GetGame()->AddLives(1);
-		fox::GetEngine().GetAudio().PlaySound("health");
+        fox::GetEngine().GetAudio().PlaySound("health");
+
     }
 
     if (other->tag == "player" && other->name == "rocket") {
