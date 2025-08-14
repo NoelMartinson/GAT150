@@ -109,9 +109,13 @@ void SpaceGame::Update(float dt) {
 
             //Compoents
 
-            auto spriteRenderer = std::make_unique<fox::SpriteRenderer>();
+            /*auto spriteRenderer = std::make_unique<fox::SpriteRenderer>();
             spriteRenderer->textureName = "textures/tankbase_02.png";
-            enemy->AddComponent(std::move(spriteRenderer));
+            enemy->AddComponent(std::move(spriteRenderer));*/
+
+			auto meshRenderer = std::make_unique<fox::MeshRenderer>();
+			meshRenderer->meshName = "meshes/enemy.msh";
+			enemy->AddComponent(std::move(meshRenderer));
 
             auto rb = std::make_unique<fox::RigidBody>();
             rb->dampening = 0.5f;

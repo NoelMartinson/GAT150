@@ -14,8 +14,8 @@ namespace fox {
 		Vector3() = default;
 		Vector3(T x, T y, T z) : x{ x }, y{ y }, z{ z } {}
 
-		T operator [] (unsigned int index) const { assert(index < 2); return (&x)[index]; }
-		T& operator [] (unsigned int index) { assert(index < 2); return (&x)[index]; }
+		T operator [] (unsigned int index) const { assert(index < 3); return (&x)[index]; }
+		T& operator [] (unsigned int index) { assert(index < 3); return (&x)[index]; }
 
 		Vector3 operator + (const Vector3& v) const { return Vector3{ x + v.x, y + v.y, z + v.z }; }
 		Vector3 operator - (const Vector3& v) const { return Vector3{ x - v.x, y - v.y, z - v.z }; }

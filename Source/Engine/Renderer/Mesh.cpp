@@ -19,7 +19,12 @@ namespace fox {
 			points.push_back(point);
 		}
 
-		return false;
+		if (!stream.eof()) {
+			Logger::Error("Failed to parse mesh file: {}", filename);
+			return false;
+		}
+
+		return true;
 	}
 	void Mesh::Draw(class Renderer& renderer, const vec2& position,float rotation, float scale) {
 		if (points.empty()) return;

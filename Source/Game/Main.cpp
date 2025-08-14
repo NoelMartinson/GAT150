@@ -1,6 +1,37 @@
 #include "Game/SpaceGame.h"
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[]) { 
+
+    // load the json data from a file
+    std::string buffer;
+    fox::file::ReadTextFile("json.txt", buffer);
+    // show the contents of the json file (debug)
+    std::cout << buffer << std::endl;
+
+    // create json document from the json file contents
+    rapidjson::Document document;
+    fox::json::Load("json.txt", document);    
+
+    std::string name;
+    int age;
+    float speed;
+    bool isAwake;
+    fox::vec2 position;
+    fox::vec3 color;
+
+    JSON_READ(document, name);
+    JSON_READ(document, age);
+    JSON_READ(document, speed);
+    JSON_READ(document, isAwake);
+    JSON_READ(document, position);
+    JSON_READ(document, color);
+
+    // show the data
+    std::cout << name << " " << age << " " << speed << " " << isAwake << std::endl;
+    std::cout << position.x << " " << position.y << std::endl;
+    std::cout << color.r << " " << color.g << " " << color.b << " " << std::endl;
+
+	return 0;
 
     // Initize Engine 
 	fox::Logger::Info("initialize engine");

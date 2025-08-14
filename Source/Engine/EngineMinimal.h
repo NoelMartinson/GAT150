@@ -7,6 +7,7 @@
 #include "Core/Time.h"
 #include "Core/Singleton.h"
 #include "Core/StringHelper.h"
+#include "Core/Json.h"
 
 // framework
 #include "Framework/Object.h"
@@ -52,6 +53,8 @@
 #include "Components/SpriteRenderer.h"
 #include "Components/RigidBody.h"
 #include "Components/CircleCollider2D.h"
+#include "Components/MeshRenderer.h"
+
 
 //audio
 #include "Audio/AudioSystem.h"
