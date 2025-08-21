@@ -42,12 +42,23 @@ namespace fox {
 			}
 		}
 	}
-	void Scene::AddActor(std::unique_ptr<class Actor> actor)
-	{
+	void Scene::AddActor(std::unique_ptr<class Actor> actor){
 		actor->scene = this;
 		actors.push_back(std::move(actor));
 	}
 	void Scene::RemoveAllActors(){
 		actors.clear();
+	}
+
+	void Scene::Read(const json::value_t& value){
+		if (JSON_HAS(value, name)) {
+			for (auto& actorValue : JSON_GET(value, actors).GetArray()) {
+
+				auto actor = Factory::Instance().Create<Actor>("Actor");
+				actor->Read(actorValue);
+
+				AddActor(std::move(actor));
+			}
+		}	
 	}
 }

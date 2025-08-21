@@ -1,37 +1,11 @@
 #include "Game/SpaceGame.h"
 
 int main(int argc, char* argv[]) { 
+	//fox::file::SetCurrentDirectory("Assets");
+	fox::Logger::Info("Current Directory: {}", fox::file::GetCurrentDirectory());
 
-    // load the json data from a file
-    std::string buffer;
-    fox::file::ReadTextFile("json.txt", buffer);
-    // show the contents of the json file (debug)
-    std::cout << buffer << std::endl;
-
-    // create json document from the json file contents
-    rapidjson::Document document;
-    fox::json::Load("json.txt", document);    
-
-    std::string name;
-    int age;
-    float speed;
-    bool isAwake;
-    fox::vec2 position;
-    fox::vec3 color;
-
-    JSON_READ(document, name);
-    JSON_READ(document, age);
-    JSON_READ(document, speed);
-    JSON_READ(document, isAwake);
-    JSON_READ(document, position);
-    JSON_READ(document, color);
-
-    // show the data
-    std::cout << name << " " << age << " " << speed << " " << isAwake << std::endl;
-    std::cout << position.x << " " << position.y << std::endl;
-    std::cout << color.r << " " << color.g << " " << color.b << " " << std::endl;
-
-	return 0;
+	auto spriteRenderer = fox::Factory::Instance().Create("SpriteRenderer");
+	spriteRenderer->name = "MySpriteRenderer";
 
     // Initize Engine 
 	fox::Logger::Info("initialize engine");
@@ -40,8 +14,6 @@ int main(int argc, char* argv[]) {
     // Initialize Game
 	std::unique_ptr<fox::Game> game = std::make_unique<SpaceGame>();
 	game->Initialize();
-
-	// Load a sound file
 	    
     // Create stars
 	std::vector<fox::vec2> stars; 

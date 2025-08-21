@@ -2,32 +2,34 @@
 #include "Enemy.h"
 #include "Player.h"
 
+FACTORY_REGISTER(Enemy)
+
 void Enemy::Update(float dt) {
-    Player* player = scene->GetActorByName<Player>("player");
+    fox::Actor* player = owner->scene->GetActorByName<fox::Actor>("player");
 
     if (player) {
-        fox::vec2 direction = player->transform.position - transform.position;
+        fox::vec2 direction = player->transform.position - owner->transform.position;
         direction = direction.Normalized();
-        transform.rotation = fox::math::radToDeg(direction.Angle());
+        owner->transform.rotation = fox::math::radToDeg(direction.Angle());
     }
 
-    fox::vec2 force = fox::vec2{ 1,0 }.Rotate(fox::math::degToRad(transform.rotation)) * speed;
+    fox::vec2 force = fox::vec2{ 1,0 }.Rotate(fox::math::degToRad(owner->transform.rotation)) * speed;
     //velocity += force * dt;
-	auto rb = GetComponent<fox::RigidBody>();
+	auto rb = owner->GetComponent<fox::RigidBody>();
     if (rb) {
         rb->velocity += force * dt;
     }
 
-    transform.position.x = fox::math::wrap(transform.position.x, 0.0f, (float)fox::GetEngine().GetRenderer().GetWidth());
-    transform.position.y = fox::math::wrap(transform.position.y, 0.0f, (float)fox::GetEngine().GetRenderer().GetHeight());
+    owner->transform.position.x = fox::math::wrap(owner->transform.position.x, 0.0f, (float)fox::GetEngine().GetRenderer().GetWidth());
+    owner->transform.position.y = fox::math::wrap(owner->transform.position.y, 0.0f, (float)fox::GetEngine().GetRenderer().GetHeight());
 
-    Actor::Update(dt);
+    Component::Update(dt);
 }
 
-void Enemy::OnCollision(Actor* other) {
+void Enemy::OnCollision(fox::Actor* other) {
     if (other->tag == "player" && other->name == "rocket") {
-        destroyed = true;
-        scene->GetGame()->AddPoints(100);
+        owner->destroyed = true;
+        owner->scene->GetGame()->AddPoints(100);
         fox::GetEngine().GetAudio().PlaySound("edeath");
 
     }

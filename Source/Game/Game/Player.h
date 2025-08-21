@@ -1,8 +1,8 @@
 #pragma once
-#include "Framework/Actor.h"
+#include "Framework/Component.h"
 #include "Math/Transform.h"
 
-class Player : public fox::Actor {
+class Player : public fox::Component {
 public:
 	float speed = 200;
 	float rotateRate = 180;
@@ -11,16 +11,11 @@ public:
 	
 public:
 	Player() = default;
-	Player(const fox::Transform& transform) :
-		Actor{ transform }
-	{};
-
+	
 	void Initialize();
-
 	void Update(float dt) override;
+		
+	void OnCollision(class fox::Actor* other);
 
-	// Inherited via Actor
-	void OnCollision(Actor* other) override;
-
-
+	void Read(const fox::json::value_t& value) override;
 };

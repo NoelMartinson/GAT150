@@ -1,6 +1,7 @@
 #pragma once
 #include "Math.h"
 #include <cassert>
+#include <iostream>
 
 namespace fox {
 	template <typename T>

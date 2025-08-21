@@ -9,6 +9,10 @@ bool SpaceGame::Initialize() {
 
     m_scene = std::make_unique<fox::Scene>(this);
 
+	fox::json::document_t document;
+	fox::json::Load("scene.json", document);
+	m_scene->Read(document);
+
     fox::GetEngine().GetAudio().AddSound("music.wav", "music", true);
     
     fox::GetEngine().GetAudio().AddSound("enemy_death.wav", "edeath", false);
@@ -69,31 +73,31 @@ void SpaceGame::Update(float dt) {
         break;
     case SpaceGame::GameState::StartRound:
     {
-        // Player
-        fox::Transform transform{ fox::vec2{ fox::GetEngine().GetRenderer().GetWidth() * 0.5f, fox::GetEngine().GetRenderer().GetHeight() * 0.5f}, 0, 2 };
-        auto player = std::make_unique<Player>(transform);
-        player->speed = 1500.0f;
-        player->rotateRate = 180.0f;
-        //player->dampening = 1.5f;
-        player->tag = "player";
-        player->name = "player";
-        fox::GetEngine().GetAudio().AddSound("rocket.wav", "rocket", false);
+        //// Player
+        //fox::Transform transform{ fox::vec2{ fox::GetEngine().GetRenderer().GetWidth() * 0.5f, fox::GetEngine().GetRenderer().GetHeight() * 0.5f}, 0, 2 };
+        //auto player = std::make_unique<Player>(transform);
+        //player->speed = 1500.0f;
+        //player->rotateRate = 180.0f;
+        ////player->dampening = 1.5f;
+        //player->tag = "player";
+        //player->name = "player";
+        //fox::GetEngine().GetAudio().AddSound("rocket.wav", "rocket", false);
 
-        //Compoents
-        auto spriteRenderer = std::make_unique<fox::SpriteRenderer>();
-        spriteRenderer->textureName = "textures/blue_04.png";
-        player->AddComponent(std::move(spriteRenderer));
+        ////Compoents
+        //auto spriteRenderer = std::make_unique<fox::SpriteRenderer>();
+        //spriteRenderer->textureName = "textures/blue_04.png";
+        //player->AddComponent(std::move(spriteRenderer));
 
-        auto rb = std::make_unique<fox::RigidBody>();
-        rb->dampening = 1.5f;
-        player->AddComponent(std::move(rb));
+        //auto rb = std::make_unique<fox::RigidBody>();
+        //rb->dampening = 1.5f;
+        //player->AddComponent(std::move(rb));
 
-        auto collider = std::make_unique<fox::CircleCollider2D>();
-        collider->radius = 60;
-        player->AddComponent(std::move(collider));
+        //auto collider = std::make_unique<fox::CircleCollider2D>();
+        //collider->radius = 60;
+        //player->AddComponent(std::move(collider));
 
-        m_scene->AddActor(std::move(player));
-        gameState = SpaceGame::GameState::Game;
+        //m_scene->AddActor(std::move(player));
+        //gameState = SpaceGame::GameState::Game;
     }
     break;
     case SpaceGame::GameState::Game:
@@ -101,51 +105,55 @@ void SpaceGame::Update(float dt) {
         if (enemySpawnTimer <= 0) {
             enemySpawnTimer = 4;
 
-            fox::Transform transform{ fox::vec2{fox::random::getReal() * 1280, fox::random::getReal() * 1024 }, 0, 2 };
-            std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform);
-            //enemy->dampening = 1.5f;
-            enemy->speed = (fox::random::getReal() * 1000) + 500;
-            enemy->tag = "enemy";
+   //         fox::Transform transform{ fox::vec2{fox::random::getReal() * 1280, fox::random::getReal() * 1024 }, 0, 2 };
+   //         std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(transform);
+   //         //enemy->dampening = 1.5f;
+   //         enemy->speed = (fox::random::getReal() * 1000) + 500;
+   //         enemy->tag = "enemy";
 
-            //Compoents
+   //         //Compoents
 
-            /*auto spriteRenderer = std::make_unique<fox::SpriteRenderer>();
-            spriteRenderer->textureName = "textures/tankbase_02.png";
-            enemy->AddComponent(std::move(spriteRenderer));*/
+   //         auto spriteRenderer = std::make_unique<fox::SpriteRenderer>();
+   //         spriteRenderer->textureName = "textures/tankbase_02.png";
+   //         enemy->AddComponent(std::move(spriteRenderer));
 
-			auto meshRenderer = std::make_unique<fox::MeshRenderer>();
-			meshRenderer->meshName = "meshes/enemy.msh";
-			enemy->AddComponent(std::move(meshRenderer));
+   //         // This works! V yippeee
 
-            auto rb = std::make_unique<fox::RigidBody>();
-            rb->dampening = 0.5f;
-            enemy->AddComponent(std::move(rb));
+			///*auto meshRenderer = std::make_unique<fox::MeshRenderer>();
+			//meshRenderer->meshName = "Mesh/enemy.msh";
+			//enemy->AddComponent(std::move(meshRenderer));*/
 
-            auto collider = std::make_unique<fox::CircleCollider2D>();
-            collider->radius = 60;
-            enemy->AddComponent(std::move(collider));
 
-            m_scene->AddActor(std::move(enemy));
+
+   //         auto rb = std::make_unique<fox::RigidBody>();
+   //         rb->dampening = 0.5f;
+   //         enemy->AddComponent(std::move(rb));
+
+   //         auto collider = std::make_unique<fox::CircleCollider2D>();
+   //         collider->radius = 60;
+   //         enemy->AddComponent(std::move(collider));
+
+   //         m_scene->AddActor(std::move(enemy));
         }
 
         healthSpawnTimer -= dt;
         if (healthSpawnTimer <= 0) {
             healthSpawnTimer = 30;
 
-            fox::Transform transform{ fox::vec2{fox::random::getReal() * 1280, fox::random::getReal() * 1024 }, 0, 0.25 };
-            std::unique_ptr<Health> health = std::make_unique<Health>(transform);
-            health->tag = "health";
+            //fox::Transform transform{ fox::vec2{fox::random::getReal() * 1280, fox::random::getReal() * 1024 }, 0, 0.25 };
+            //std::unique_ptr<Health> health = std::make_unique<Health>(transform);
+            //health->tag = "health";
 
-            //Compoents
-            auto spriteRenderer = std::make_unique<fox::SpriteRenderer>();
-            spriteRenderer->textureName = "textures/heart.png";
-            health->AddComponent(std::move(spriteRenderer));
+            ////Compoents
+            //auto spriteRenderer = std::make_unique<fox::SpriteRenderer>();
+            //spriteRenderer->textureName = "textures/heart.png";
+            //health->AddComponent(std::move(spriteRenderer));
 
-            auto collider = std::make_unique<fox::CircleCollider2D>();
-            collider->radius = 60;
-            health->AddComponent(std::move(collider));
+            //auto collider = std::make_unique<fox::CircleCollider2D>();
+            //collider->radius = 60;
+            //health->AddComponent(std::move(collider));
 
-            m_scene->AddActor(std::move(health));
+            //m_scene->AddActor(std::move(health));
         }
         break;
     case SpaceGame::GameState::PlayerDead:
@@ -182,6 +190,8 @@ void SpaceGame::Shutdown() {
 }
 
 void SpaceGame::Draw(fox::Renderer& renderer) {
+    m_scene->Draw(renderer);
+
     if (gameState == GameState::Title) {
         titleText->Create(renderer, "ENGINE  ASTEROIDS", fox::vec3{ 1,0,0 });
         titleText->Draw(renderer, 125, 400);
@@ -215,9 +225,7 @@ void SpaceGame::Draw(fox::Renderer& renderer) {
         livesText->Draw(renderer, renderer.GetWidth() - 200.0f, 20.0f);
     }
 
-    fox::GetEngine().GetPS().Draw(fox::GetEngine().GetRenderer());
-
-    m_scene->Draw(renderer);
+    fox::GetEngine().GetPS().Draw(fox::GetEngine().GetRenderer());    
 }
 
 void SpaceGame::OnPlayerDeath() {

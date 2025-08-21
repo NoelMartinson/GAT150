@@ -2,13 +2,16 @@
 #include "Audio/AudioClip.h"
 
 namespace fox {
+	FACTORY_REGISTER(AudioSource)
+
 	void AudioSource::Update(float dt)	{
 	}
 
-	void fox::AudioSource::Play()	{
+	void AudioSource::Play()	{
 		auto audioClip = Resources().Get<AudioClip>(audioClipName, GetEngine().GetAudio());
 		if (audioClip) {
 			GetEngine().GetAudio().PlaySound(*audioClip);
 		}
 	}
+
 }

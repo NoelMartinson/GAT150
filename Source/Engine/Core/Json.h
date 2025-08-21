@@ -4,17 +4,22 @@
 #include <rapidjson/document.h>
 #include <string>
 
-#define JSON_READ(value, data) fox::json::Read(value, #data, data)
+#define JSON_READ(value, data)				fox::json::Read(value, #data, data)
+#define JSON_READ_NAME(value, name, data)	fox::json::Read(value, name, data)
 
-namespace fox::json
-{
-	bool Load(const std::string& filename, rapidjson::Document& document);
+#define JSON_HAS(value, data) 				value.HasMember(#data)
+#define JSON_GET(value, data) 				value[#data]
 
-	bool Read(const rapidjson::Value& value, const std::string& name, int& data);
+namespace fox::json{
+	using value_t = rapidjson::Value;
+	using document_t = rapidjson::Document;
 
-	bool Read(const rapidjson::Value& value, const std::string& name, float& data);
-	bool Read(const rapidjson::Value& value, const std::string& name, bool& data);
-	bool Read(const rapidjson::Value& value, const std::string& name, std::string& data);
-	bool Read(const rapidjson::Value& value, const std::string& name, vec2& data);
-	bool Read(const rapidjson::Value& value, const std::string& name, vec3& data);
+	bool Load(const std::string& filename, document_t& document);
+
+	bool Read(const value_t& value, const std::string& name, float& data, bool required = false);
+	bool Read(const value_t& value, const std::string& name, int& data, bool required = false);
+	bool Read(const value_t& value, const std::string& name, bool& data, bool required = false);
+	bool Read(const value_t& value, const std::string& name, std::string& data, bool required = false);
+	bool Read(const value_t& value, const std::string& name, vec2& data, bool required = false);
+	bool Read(const value_t& value, const std::string& name, vec3& data, bool required = false);
 }

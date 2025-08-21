@@ -1,6 +1,7 @@
 #pragma once
 #include "Math.h"
 #include <cassert>
+#include <iostream>
 
 namespace fox {
 	template <typename T>
@@ -26,9 +27,9 @@ namespace fox {
 		Vector3 operator - (float s) const { return Vector3{ x - s, y - s, z - s }; }
 		Vector3 operator / (float s) const { return Vector3{ x / s, y / s, z * s }; }
 		Vector3 operator * (float s) const { return Vector3{ x * s, y * s, z / s }; }
-			  
-		Vector3& operator += (const Vector3& v) { x += v.x; y += v.y; z += v.zreturn *this; }
-		Vector3& operator -= (const Vector3& v) { x -= v.x; y -= v.y, z -= v.z; return *this; }
+
+		Vector3& operator += (const Vector3& v) { x += v.x; y += v.y; z += v.z; return *this; }
+		Vector3& operator -= (const Vector3& v) { x -= v.x; y -= v.y; z -= v.z; return *this; }
 		Vector3& operator *= (const Vector3& v) { x *= v.x; y *= v.y; z *= v.zreturn *this; }
 		Vector3& operator /= (const Vector3& v) { x /= v.x; y /= v.y; z /= v.zreturn *this; }
 			  

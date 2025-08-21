@@ -1,20 +1,16 @@
 #pragma once
-#include "Framework/Actor.h"
+#include "Framework/Component.h"
 #include "Math/Transform.h"
 
-class Enemy : public fox::Actor {
+class Enemy : public fox::Component {
 public:
 	float speed = 200.0f;
 
 public:
 	Enemy() = default;
-	Enemy(const fox::Transform& transform) :
-		Actor{ transform }
-	{
-	};
 
 	void Update(float dt) override;
 
-	// Inherited via Actor
-	void OnCollision(Actor* other) override;
+	// Inherited via Component
+	void OnCollision(class fox::Actor* other) ;
 };

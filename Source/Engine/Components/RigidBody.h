@@ -1,5 +1,6 @@
 #pragma once
 #include "Framework/Component.h"
+#include "Core/Json.h"
 
 namespace fox {
 	class RigidBody : public Component {
@@ -8,5 +9,6 @@ namespace fox {
 		float dampening{ 0 };
 	public:
 		void Update(float dt) override;
+		void Read(const json::value_t& value);
 	};
 }

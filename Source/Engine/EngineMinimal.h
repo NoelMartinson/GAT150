@@ -1,6 +1,7 @@
 #pragma once
 
 // core
+#include "Core/Factory.h"
 #include "Core/File.h"
 #include "Core/Logger.h"
 #include "Core/Random.h"
@@ -8,12 +9,15 @@
 #include "Core/Singleton.h"
 #include "Core/StringHelper.h"
 #include "Core/Json.h"
+#include "Core/Serializable.h"
 
 // framework
 #include "Framework/Object.h"
 #include "Framework/Actor.h"
 #include "Framework/Game.h"
 #include "Framework/Scene.h"
+#include "Framework/Component.h"
+
 
 // math
 #include "Math/Math.h"
@@ -54,6 +58,7 @@
 #include "Components/RigidBody.h"
 #include "Components/CircleCollider2D.h"
 #include "Components/MeshRenderer.h"
+#include "Components/AudioSource.h"
 
 
 //audio

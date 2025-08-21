@@ -1,5 +1,6 @@
 #pragma once
 #include "../Core/StringHelper.h"
+#include "../Core/Serializable.h"
 #include <string>
 #include <vector>
 #include <memory>
@@ -9,9 +10,11 @@ namespace fox {
 	class Actor;
 	class Game;
 
-	class Scene {
+	class Scene : public Serializable {
 	public:
 		Scene(Game* game) : game{ game } {}
+
+		void Read(const json::value_t& value) override;
 
 		void Update(float dt);
 		void Draw(class Renderer& renderer);
@@ -30,6 +33,9 @@ namespace fox {
 	private:
 		class Game* game{ nullptr };
 		std::list<std::unique_ptr<class Actor>> actors;
+
+		// Inherited via Serializable
+		
 	};
 
 	template<typename T>

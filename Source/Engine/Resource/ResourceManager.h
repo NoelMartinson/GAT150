@@ -14,6 +14,7 @@ namespace fox {
         void Clear() {resources.clear();}
 
         template<typename T, typename ... Args>
+            requires std::derived_from<T, Resource>
         res_t<T> Get(const std::string& name, Args&& ... args);
 
         template<typename T, typename ... Args>
@@ -27,6 +28,7 @@ namespace fox {
     };
 
     template<typename T, typename ... Args>
+        requires std::derived_from<T, Resource>
     inline res_t<T> ResourceManager::Get(const std::string& name, Args&& ...args)
     {
 		return GetWithID<T>(name, name, std::forward<Args>(args)...);

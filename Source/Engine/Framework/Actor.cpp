@@ -3,7 +3,9 @@
 #include "Renderer/Renderer.h"
 
 namespace fox {
-	void fox::Actor::Update(float dt) {
+	FACTORY_REGISTER(Actor)
+
+	void Actor::Update(float dt) {
 		if (destroyed) return;
 
 
@@ -23,7 +25,7 @@ namespace fox {
 		}		
 	}
 	 
-	void fox::Actor::Draw(Renderer& renderer) {
+	void Actor::Draw(Renderer& renderer) {
 		if (destroyed) return;
 
 		for (auto& component : components) {
@@ -36,9 +38,29 @@ namespace fox {
 		}
 	}
 
-	void Actor::AddComponent(std::unique_ptr<class Component> component)
-	{
+	void Actor::AddComponent(std::unique_ptr<class Component> component){
 		component->owner = this;
 		components.push_back(std::move(component));
+	}
+	void Actor::Read(const json::value_t& value){
+		Object::Read(value);
+
+		JSON_READ(value, tag);
+		JSON_READ(value, lifespan);
+
+		if (JSON_HAS(value, transform)) transform.Read(JSON_GET(value, transform));
+
+		if (JSON_HAS(value, componenets)) {
+			for (auto& comonentValue : JSON_GET(value, components).GetArray()) {
+
+				std::string type;
+				JSON_READ(comonentValue, type);
+
+				auto component = Factory::Instance().Create<Component>(type);
+				component->Read(comonentValue);
+
+				AddComponent(std::move(component));
+			}
+		}
 	}
 }

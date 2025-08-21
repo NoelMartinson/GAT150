@@ -36,8 +36,8 @@ namespace fox
             SDL_Quit();
             return false;
         }
-
-		//SDL_SetRenderLogicalPresentationSize(renderer, width, height, SDL_LOGICAL_PRESENTATION_LETTERBOX);
+         
+        SDL_SetRenderLogicalPresentation(renderer, width, height, SDL_LOGICAL_PRESENTATION_LETTERBOX);
 
         return true;
     }

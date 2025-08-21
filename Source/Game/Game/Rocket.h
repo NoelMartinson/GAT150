@@ -1,20 +1,16 @@
 #pragma once
-#include "Framework/Actor.h"
+#include "Framework/Component.h"
 
-class Rocket : public fox::Actor {
+class Rocket : public fox::Component {
 public:
 	float speed = 200;
 public:
 	Rocket() = default;
-	Rocket(const fox::Transform& transform) :
-		Actor{ transform }
-	{
-	}
-
+	
 	void Update(float dt) override;
 
 
 	// Inherited via Actor
-	void OnCollision(Actor* other) override;
+	void OnCollision(class fox::Actor* other);
 
 };

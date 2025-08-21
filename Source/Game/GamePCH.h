@@ -8,6 +8,7 @@
 #include "Components/RigidBody.h"
 #include "Components/CircleCollider2D.h"
 #include "Components/MeshRenderer.h"
+#include "Components/AudioSource.h"
 
 //audio
 #include "Audio/AudioSystem.h"

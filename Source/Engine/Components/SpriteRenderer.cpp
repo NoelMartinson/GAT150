@@ -3,6 +3,8 @@
 #include "Framework/Actor.h"
 
 namespace fox {
+    FACTORY_REGISTER(SpriteRenderer)
+
 	void SpriteRenderer::Update(float dt){
 	}
 
@@ -16,5 +18,9 @@ namespace fox {
                 owner->transform.rotation,
                 owner->transform.scale);
         }
+    }
+    void SpriteRenderer::Read(const json::value_t& value){
+        Object::Read(value);
+		JSON_READ_NAME(value, "texture_name", textureName);
     }
 }

@@ -3,6 +3,8 @@
 #include "Engine.h"
 #include "Player.h"
 
+FACTORY_REGISTER(Health)
+
 void Health::Initialize()
 {
     fox::GetEngine().GetAudio().AddSound("enemy_death.wav", "edeath", false);
@@ -13,17 +15,17 @@ void Health::Update(float dt)
 {
 }
 
-void Health::OnCollision(Actor* other)
+void Health::OnCollision(fox::Actor* other)
 {
     if (other->tag == "player" && other->name == "player") {
-        destroyed = true;
-        scene->GetGame()->AddLives(1);
+        owner->destroyed = true;
+        owner->scene->GetGame()->AddLives(1);
         fox::GetEngine().GetAudio().PlaySound("health");
 
     }
 
     if (other->tag == "player" && other->name == "rocket") {
-        destroyed = true;
+        owner->destroyed = true;
         fox::GetEngine().GetAudio().PlaySound("edeath");
     }
 }

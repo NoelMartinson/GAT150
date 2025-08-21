@@ -24,10 +24,12 @@ namespace fox {
 			transform(transform)
 		{}  
 
+		void Read(const json::value_t& value) override;
+
 		virtual void Update(float dt);  
 		virtual void Draw(class Renderer& renderer);  
 
-		virtual void OnCollision(Actor* other) = 0;
+		virtual void OnCollision(Actor* other) {}
 
 		//
 		void AddComponent(std::unique_ptr<Component> component);
@@ -41,8 +43,8 @@ namespace fox {
 
 
 	protected:  
-		std::vector<std::unique_ptr<Component>> components;
-	};  
+		std::vector<std::unique_ptr<Component>> components;		
+	};
 
 	template<typename T>
 	inline T* Actor::GetComponent()
