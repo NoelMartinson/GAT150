@@ -15,4 +15,4 @@ namespace fox {
 	private:
 		b2WorldId m_worldId;
 	};
-}
+} 
