@@ -29,3 +29,7 @@ void Health::OnCollision(fox::Actor* other)
         fox::GetEngine().GetAudio().PlaySound("edeath");
     }
 }
+
+void Health::Read(const fox::json::value_t& value){
+	Object::Read(value);
+}

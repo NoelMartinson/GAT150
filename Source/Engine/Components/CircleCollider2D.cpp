@@ -6,13 +6,6 @@ namespace fox {
 	void CircleCollider2D::Update(float dt) {
 	}
 
-	void CircleCollider2D::Read(const json::value_t& value)
-	{
-		Object::Read(value);
-
-		//JSON_READ
-	}
-
 	bool CircleCollider2D::CheckCollision(ColliderComponent& other) {
 		float distance = (owner->transform.position - other.owner->transform.position).Length();
 

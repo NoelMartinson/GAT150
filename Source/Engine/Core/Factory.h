@@ -1,5 +1,6 @@
 #pragma once
 #include "Framework/Object.h"
+#include "Framework/Actor.h"
 #include "Logger.h"
 #include "StringHelper.h"
 #include "Components/SpriteRenderer.h"
@@ -29,19 +30,41 @@ namespace fox {
 	class Creator : public CreatorBase {
 	public:
 		std::unique_ptr<Object> Create() override {
-			return std::make_unique<SpriteRenderer>();
+			return std::make_unique<T>();
 		}
+	};
+
+	template <typename T>
+		requires std::derived_from<T, Object>
+	class PrototypeCreator : public CreatorBase {
+	public:
+		PrototypeCreator(std::unique_ptr<T> prototype) :
+			prototype{ std::move(prototype) }
+		{
+		}
+
+		std::unique_ptr<Object> Create() override {
+			return prototype->Clone();
+		}
+	private:
+		std::unique_ptr<T> prototype;
 	};
 
 	class Factory : public Singleton<Factory> {
 	public:
 		template <typename T>
-			requires std::derived_from<T, Object>
+		requires std::derived_from<T, Object>
 		void Register(const std::string& name);
 
+		template <typename T>
+		requires std::derived_from<T, Object>
+		void RegisterPrototype(const std::string& name, std::unique_ptr<T> prototype);
+
 		template <typename T = Object>
-			requires std::derived_from<T, Object>
+		requires std::derived_from<T, Object>
 		std::unique_ptr<T> Create(const std::string& name);
+
+		void RemoveAll() { registry.clear(); }
 	private:
 		std::map<std::string, std::unique_ptr<CreatorBase>> registry;
 	};
@@ -52,6 +75,16 @@ namespace fox {
 	inline void Factory::Register(const std::string& name) {
 		std::string key = tolower(name);
 		registry[key] = std::make_unique<Creator<T>>();
+		Logger::Info("Registered factory Object: {}", name);
+	}
+
+	template<typename T>
+		requires std::derived_from<T, Object>
+	inline void Factory::RegisterPrototype(const std::string& name, std::unique_ptr<T> prototype)
+	{
+		std::string key = tolower(name);
+		registry[key] = std::make_unique<PrototypeCreator<T>>(std::move(prototype));
+		Logger::Info("Registered factory Object Prototype: {}", name);
 	}
 
 	template<typename T>
@@ -74,5 +107,27 @@ namespace fox {
 		}
 
 		return nullptr;
+	}
+
+	template<typename T = Actor>
+		requires std::derived_from<T, Actor>
+	std::unique_ptr<T> Instantiate(const std::string& name) {
+		return Factory::Instance().Create<T>(name);
+	}
+
+	template<typename T = Actor>
+	requires std::derived_from<T, Actor>
+	std::unique_ptr<T> Instantiate(const std::string& name, const vec2& position, float rotation, float scale) {
+		auto instance = Factory::Instance().Create<T>(name);
+		instance->transform = Transform{ position, rotation, scale };
+		return instance;
+	}
+
+	template<typename T = Actor>
+		requires std::derived_from<T, Actor>
+	std::unique_ptr<T> Instantiate(const std::string& name, const Transform& transform) {
+		auto instance = Factory::Instance().Create<T>(name);
+		instance->transform = transform;
+		return instance;
 	}
 }

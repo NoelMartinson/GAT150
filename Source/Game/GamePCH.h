@@ -3,6 +3,8 @@
 
 #include "Engine.h"
 
+#include "Framework/Actor.h"
+
 //Components
 #include "Components/SpriteRenderer.h"
 #include "Components/RigidBody.h"

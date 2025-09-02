@@ -2,20 +2,24 @@
 #include "Framework/Component.h"
 #include "Math/Transform.h"
 
-class Player : public fox::Component {
+class Player : public fox::Component, public fox::ICollidable {
 public:
 	float speed = 200;
 	float rotateRate = 180;
 	float fireTime = 0.2f;
 	float fireTimer = 0.0f;
 	
+	fox::RigidBody* rigidBody{ nullptr };
+
 public:
 	Player() = default;
+	CLASS_PROTOTYPE(Player)
 	
 	void Initialize();
+	void Start() override;
 	void Update(float dt) override;
-		
-	void OnCollision(class fox::Actor* other);
+
+	void OnCollision(class fox::Actor* other) override;
 
 	void Read(const fox::json::value_t& value) override;
 };

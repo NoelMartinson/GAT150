@@ -15,6 +15,7 @@ namespace fox {
 
 		bool destroyed{ false };
 		float lifespan{ 0 };
+		bool persistant{ false };
 
 		Transform transform;  
 		class Scene* scene{ nullptr };
@@ -23,13 +24,19 @@ namespace fox {
 		Actor(const fox::Transform& transform) :
 			transform(transform)
 		{}  
+		Actor(const Actor& other);
+
+		CLASS_PROTOTYPE(Actor)
 
 		void Read(const json::value_t& value) override;
+
+		virtual void Start();
+		virtual void Destroyed();
 
 		virtual void Update(float dt);  
 		virtual void Draw(class Renderer& renderer);  
 
-		virtual void OnCollision(Actor* other) {}
+		virtual void OnCollision(Actor* other);
 
 		//
 		void AddComponent(std::unique_ptr<Component> component);

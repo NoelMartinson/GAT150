@@ -21,4 +21,12 @@ namespace fox {
 
 		return result;
 	}
+
+	inline bool equalsIgnoreCase(const std::string& sA, const std::string& sB) {
+		if (sA.length() != sB.length()) return false;
+
+		return std::equal(sA.begin(), sA.end(), sB.begin(),[](char cA, char cB) {
+			return (std::tolower(cA) == std::tolower(cB));
+		});
+	}
 }

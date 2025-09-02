@@ -4,7 +4,7 @@
 	#include "Renderer/Text.h"
 	#include "Audio/AudioSystem.h"
 
-	class SpaceGame : public fox::Game {
+	class SpaceGame : public fox::Game, public fox::IObserver {
 	public:
 		enum class GameState {
 			Initalize,
@@ -25,7 +25,11 @@
 		void Draw(class fox::Renderer& renderer);
 
 		void OnPlayerDeath();
+		void SpawnEnemy();
+		void SpawnHealth();
 		
+		void OnNotify(const fox::Event& event) override;
+
 	private:
 		GameState gameState = GameState::Initalize;
 		float enemySpawnTimer{ 0 };
@@ -40,4 +44,5 @@
 		std::unique_ptr<class fox::Text> livesText;
 
 		FMOD::Channel* musicChannel = nullptr;
+
 	};

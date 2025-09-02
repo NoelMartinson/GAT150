@@ -5,10 +5,13 @@
 namespace fox {
 	class CircleCollider2D : public ColliderComponent {
 	public:
-		virtual bool CheckCollision(ColliderComponent& other) override;
+		float radius{ 0 };
 
-		// Inherited via ColliderComponent
+	public:
+		CLASS_PROTOTYPE(CircleCollider2D)
+
 		void Update(float dt) override;
+		virtual bool CheckCollision(ColliderComponent& other) override;
 
 		void Read(const json::value_t& value) override;
 	};

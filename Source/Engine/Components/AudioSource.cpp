@@ -7,11 +7,10 @@ namespace fox {
 	void AudioSource::Update(float dt)	{
 	}
 
-	void AudioSource::Play()	{
+	void AudioSource::Play() const	{
 		auto audioClip = Resources().Get<AudioClip>(audioClipName, GetEngine().GetAudio());
 		if (audioClip) {
 			GetEngine().GetAudio().PlaySound(*audioClip);
 		}
 	}
-
 }

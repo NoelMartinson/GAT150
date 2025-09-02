@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 	fox::Font* font = new fox::Font();
     font->Load("arcadeclassic.ttf", 20);
 
-    auto background = fox::Resources().Get<fox::Texture>("Textures/space-was-cool.png", fox::GetEngine().GetRenderer());
+    //auto background = fox::Resources().Get<fox::Texture>("Textures/space-was-cool.png", fox::GetEngine().GetRenderer());
 
     float screenW = (float)fox::GetEngine().GetRenderer().GetWidth();
     float screenH = (float)fox::GetEngine().GetRenderer().GetHeight();
@@ -58,7 +58,7 @@ int main(int argc, char* argv[]) {
         fox::GetEngine().GetRenderer().SetColor(color.r, color.g, color.b);
         fox::GetEngine().GetRenderer().Clear();        
 
-        fox::GetEngine().GetRenderer().DrawTextureBG(background.get(), 0, screenW, screenH);
+        //fox::GetEngine().GetRenderer().DrawTextureBG(background.get(), 0, screenW, screenH);
 
         // draw Game
         game->Draw(fox::GetEngine().GetRenderer());

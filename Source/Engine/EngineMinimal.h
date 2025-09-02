@@ -49,6 +49,15 @@
 #include <cstdlib>
 #include <filesystem>
 
+//#Physics
+#include "Physics/Physics.h"
+#include "Physics/Collidable.h"
+
+// Event
+#include "Event/Event.h"
+#include "Event/EventManager.h"
+#include "Event/Observer.h"
+
 #include "EngineMinimal.h"
 
 #include "Engine.h"

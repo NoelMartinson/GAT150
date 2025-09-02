@@ -21,12 +21,18 @@ namespace fox {
 		m_particleSystem = std::make_unique<fox::ParticleSystem>();
 		m_particleSystem->Initialize(5000);
 
+		m_physics = std::make_unique<Physics>();
+		m_physics->Initialize();
+
 		return true;
 	}
 
 	void Engine::Shutdown() {
 		Resources().Clear();
+		Factory::Instance().RemoveAll();
+		EventManager::Instance().RemoveAll();
 
+		m_physics->Shutdown();
 		m_particleSystem->Shutdown();
 		m_audio->Shutdown();
 		m_input->Shutdown();
@@ -38,6 +44,7 @@ namespace fox {
 		m_input->Update();
 		m_audio->Update();
 		m_particleSystem->Update(m_time.GetDeltaTime());
+		m_physics->Update(m_time.GetDeltaTime());
 	}
 	void Engine::Draw(){
 

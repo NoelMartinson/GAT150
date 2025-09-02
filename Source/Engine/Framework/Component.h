@@ -9,10 +9,9 @@ namespace fox {
         Actor* owner{ nullptr };
 
         Component() = default;
-        virtual ~Component() = default;
 
-        void Draw();
-
+        virtual void Start() {}
+        virtual void Destroyed() {}
         virtual void Update(float dt) = 0;
     };
 }
