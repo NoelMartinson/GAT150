@@ -12,31 +12,19 @@ void Player::Start() {
 }
 
 void Player::Update(float dt){
-
-    /*fox::Particle particle;
-    particle.position = transform.position;
-    particle.velocity = fox::vec2{ fox::random::getReal(200.0f), fox::random::getReal(200.0f)};
-	particle.color = fox::vec3{ 1, 1, 1 };
-	particle.lifespan = 2.0f;
-	fox::GetEngine().GetPS().AddParticle(particle);*/
-
-   
+       
     float rotate = 0;
-    if (fox::GetEngine().GetInput().GetKeyDown(SDL_SCANCODE_A)) rotate = -1;
+	if (fox::GetEngine().GetInput().GetKeyDown(SDL_SCANCODE_A)) rotate = -1; 
     if (fox::GetEngine().GetInput().GetKeyDown(SDL_SCANCODE_D)) rotate = +1;
+    rigidBody->ApplyTorque(rotate * rotateRate);
     
-    owner->transform.rotation += (rotate * rotateRate) * dt;
 
     float thrust = 0;
 	if (fox::GetEngine().GetInput().GetKeyDown(SDL_SCANCODE_W)) thrust = +1;
 
     fox::vec2 direction{ 1, 0 };
 	fox::vec2 force = direction.Rotate(fox::math::degToRad(owner->transform.rotation)) * thrust * speed;
-
-    auto rb = owner->GetComponent<fox::RigidBody>();
-    if (rb) {
-        rb->velocity += force * dt;
-    }
+    rigidBody->ApplyForce(force);
 
 	owner->transform.position.x = fox::math::wrap(owner->transform.position.x, 0.0f, (float)fox::GetEngine().GetRenderer().GetWidth());
     owner->transform.position.y = fox::math::wrap(owner->transform.position.y, 0.0f, (float)fox::GetEngine().GetRenderer().GetHeight());
@@ -60,10 +48,9 @@ void Player::OnCollision(fox::Actor* other)
         return;
     } 
 
-
     if (other->tag == "enemy") {
         owner->destroyed = true;
-    	EVENT_NOTIFY("player_dead");
+    	EVENT_NOTIFY(player_dead);
             
     }
 }

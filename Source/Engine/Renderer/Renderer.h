@@ -4,6 +4,7 @@
 #include <SDL3_ttf/SDL_ttf.h>  
 #include <SDL3_image/SDL_image.h>  
 #include "Texture.h"  
+#include "Math/Rect.h"
 
 namespace fox {  
 	class Renderer {  
@@ -29,7 +30,9 @@ namespace fox {
 		void DrawTexture(class Texture& texture, float x, float y, float angle = 0.0f);
         void DrawTexture(class Texture& texture, float x, float y, float angle = 0.0f, float scale = 0.1f);
         void DrawTextureBG(class Texture* texture, float x, float y, float angle = 0.0f);
-	private:  
+		void DrawTexture(class Texture& texture, const fox::rect& sourceRect, float x, float y, float angle, float scale = 1);
+
+		private:
 		friend class Text;  
 		friend class Texture;  
 

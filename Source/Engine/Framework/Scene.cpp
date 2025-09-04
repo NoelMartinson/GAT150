@@ -16,6 +16,9 @@ namespace fox {
 
 		for (auto& actorA : actors) {
 			for (auto& actorB : actors) {
+
+				continue;
+
 				if (actorA == actorB || (actorA->destroyed || actorB->destroyed)) continue;
 
 				auto colliderA = actorA->GetComponent<ColliderComponent>();

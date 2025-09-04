@@ -1,16 +1,32 @@
 #pragma once
 #include "Framework/Component.h"
 #include "Core/Json.h"
+#include "Physics/PhysicsBody.h"
 
 namespace fox {
 	class RigidBody : public Component {
 	public:
+		PhysicsBody::physicsBodyDef bodyDef;
+		vec2 size{ 0, 0 };
+		vec2 scale{ 1, 1 };
+
 		vec2 velocity{0,0};
 		float dampening{ 0 };
 	public:
-		CLASS_PROTOTYPE(RigidBody)
+		RigidBody() = default;
+		RigidBody(const RigidBody& other);
+				
+		CLASS_PROTOTYPE(RigidBody)		
 
+		void Start() override;
 		void Update(float dt) override;
 		void Read(const json::value_t& value);
+
+		void ApplyForce(const vec2& force);
+		void ApplyTorque(float radians);
+		void SetVelocity(const vec2& velocity);
+
+	private:
+		std::unique_ptr<PhysicsBody> physicsBody;
 	};
 }

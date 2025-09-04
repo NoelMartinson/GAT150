@@ -1,11 +1,13 @@
 #pragma once
 #include "RendererComponent.h"
 #include "Core/Json.h"
+#include "Math/Rect.h"
 
 namespace fox {
 	class SpriteRenderer : public RendererComponent {
 	public:
 		std::string textureName;
+		fox::rect textureRect;
 		res_t<Texture> texture;
 
 	public:

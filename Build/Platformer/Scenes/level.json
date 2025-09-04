@@ -1,0 +1,110 @@
+{
+  "actors": [
+    {
+      "name": "sprite",
+      "tag": "background",
+      "persistant": true,
+      "transform": {
+        "position": [
+          600,
+          600
+        ],
+        "rotation": 0,
+        "scale": 5
+      },
+      "components": [
+        {
+          "type": "SpriteRenderer",
+          "texture_name": "textures/sky.png"
+        }
+      ]
+    },
+    {
+      "persistent": true,
+      "transform": {
+        "position": [
+          460,
+          640
+        ],
+        "rotation": 0,
+        "scale": 0.2
+      },
+      "components": [
+        {
+          "type": "SpriteRenderer",
+          "texture_name": "textures/tree01.png"
+        }
+      ]
+    },
+    {
+      "tag": "ground",
+      "persistent": true,
+      "transform": {
+        "position": [
+          640,
+          900
+        ],
+        "rotation": 0,
+        "scale": 0.2
+      },
+      "components": [
+        {
+          "type": "SpriteRenderer",
+          "texture_name": "textures/platform.png"
+        },
+        {
+          "type": "RigidBody",
+          "isDynamic": false,
+          "scale": [ 0.8, 0.5 ]
+        }
+      ]
+    },
+    {
+      "tag": "crate",
+      "persistent": true,
+      "transform": {
+        "position": [
+          640,
+          400
+        ],
+        "rotation": 0,
+        "scale": 1
+      },
+      "components": [
+        {
+          "type": "SpriteRenderer",
+          "texture_name": "textures/crate02.png"
+        },
+        {
+          "type": "RigidBody"
+        }
+      ]
+    },
+    {
+      "name": "bat",
+      "tag": "enemy",
+      "transform": {
+        "position": [
+          940,
+          212
+        ],
+        "rotation": 0,
+        "scale": 3
+      },
+      "components": [
+        {
+          "type": "SpriteRenderer"
+        },
+        {
+          "type": "Animator",
+          "animations": [
+            {
+              "name": "idle",
+              "texture_animation": "animations/bat_idle.json"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,19 +1,21 @@
 #include "Physics.h"
 
 namespace fox {
+	float Physics::pixelsPerUnit = 32.0f;
+	
 	bool Physics::Initialize() {
 		b2WorldDef worldDef = b2DefaultWorldDef();
-		worldDef.gravity = b2Vec2{ 0.0f, -10.0f };
-		m_worldId = b2CreateWorld(&worldDef);
+		worldDef.gravity = b2Vec2{ 0.0f, 10.0f };
+		worldId = b2CreateWorld(&worldDef);
 
 		return true;
 	}
 
 	void Physics::Shutdown() {
-		b2DestroyWorld(m_worldId);
+		b2DestroyWorld(worldId);
 	}
 
 	void Physics::Update(float dt) {
-		b2World_Step(m_worldId, 1.0f / 60.0f, 4);
+		b2World_Step(worldId, 1.0f / 60.0f, 4);
 	}
 }

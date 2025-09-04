@@ -11,7 +11,7 @@ void Rocket::Update(float dt) {
 
 	auto rb = owner->GetComponent<fox::RigidBody>();
 	if (rb) {
-		rb->velocity = force;
+		rb->SetVelocity(force);
 	}
 
 	owner->transform.position.x = fox::math::wrap(owner->transform.position.x, 0.0f, (float)fox::GetEngine().GetRenderer().GetWidth());

@@ -23,6 +23,7 @@ namespace fox {
 
 		m_physics = std::make_unique<Physics>();
 		m_physics->Initialize();
+		Physics::setPixelsPerUnit(32.0f);
 
 		return true;
 	}

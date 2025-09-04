@@ -1,7 +1,7 @@
-#include "Game/SpaceGame.h"
+#include "Platformer/PlatformerGame.h"
 
 int main(int argc, char* argv[]) { 
-	//fox::file::SetCurrentDirectory("Assets");
+	fox::file::SetCurrentDirectory("Platformer");
 	fox::Logger::Info("Current Directory: {}", fox::file::GetCurrentDirectory());
 
 	auto spriteRenderer = fox::Factory::Instance().Create("SpriteRenderer");
@@ -12,7 +12,7 @@ int main(int argc, char* argv[]) {
     fox::GetEngine().Initialize();
 
     // Initialize Game
-	std::unique_ptr<fox::Game> game = std::make_unique<SpaceGame>();
+	std::unique_ptr<fox::Game> game = std::make_unique<PlatformerGame>();
 	game->Initialize();
 	    
     // Create stars

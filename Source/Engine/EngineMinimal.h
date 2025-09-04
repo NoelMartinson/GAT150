@@ -24,6 +24,7 @@
 #include "Math/Vector2.h"
 #include "Math/Vector3.h"
 #include "Math/Transform.h"
+#include "Math/Rect.h"
 
 // resources
 #include "Resource/Resource.h"
@@ -52,6 +53,7 @@
 //#Physics
 #include "Physics/Physics.h"
 #include "Physics/Collidable.h"
+#include "Physics/PhysicsBody.h"
 
 // Event
 #include "Event/Event.h"
@@ -68,6 +70,7 @@
 #include "Components/CircleCollider2D.h"
 #include "Components/MeshRenderer.h"
 #include "Components/AudioSource.h"
+#include "Components/Animator.h"
 
 
 //audio
@@ -84,3 +87,4 @@
 #include "Renderer/Mesh.h"
 #include "Renderer/Text.h"
 #include "Renderer/ParticleSystem.h"
+#include "Renderer/TextureAnimation.h"
