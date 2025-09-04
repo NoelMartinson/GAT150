@@ -12,8 +12,7 @@ bool SpaceGame::Initialize() {
     m_scene = std::make_unique<fox::Scene>(this);
 	m_scene->Load("scene.json");
 
-    fox::GetEngine().GetAudio().AddSound("music.wav", "music", true);
-    
+    fox::GetEngine().GetAudio().AddSound("music.wav", "music", true);    
     fox::GetEngine().GetAudio().AddSound("enemy_death.wav", "edeath", false);
     fox::GetEngine().GetAudio().AddSound("player_death.wav", "pdeath", false);
     fox::GetEngine().GetAudio().AddSound("game_over.wav", "game_over", false);
@@ -143,20 +142,7 @@ void SpaceGame::Draw(fox::Renderer& renderer) {
 
     }
 
-    if (gameState == GameState::Game) {
-        /*auto texture = fox::Resources().Get<fox::Texture>("Textures/space-was-cool.png", fox::GetEngine().GetRenderer());
-
-        float screenW = (float)fox::GetEngine().GetRenderer().GetWidth();
-        float screenH = (float)fox::GetEngine().GetRenderer().GetHeight();
-        float texW = (float)texture->GetSize().x;
-        float texH = (float)texture->GetSize().y;
-
-
-        float scaleX = screenW / texW;
-        float scaleY = screenH / texH;
-        float finalScale = (scaleX > scaleY) ? scaleX : scaleY;*/
-
-        //fox::GetEngine().GetRenderer().DrawTexture(*texture, screenW * 0.5f, screenH * 0.5f, 0, finalScale);
+    if (gameState == GameState::Game) {       
 
         scoreText->Create(renderer, "Score " + std::to_string(score), fox::vec3{ 1,1,1 });
         scoreText->Draw(renderer, 20, 20);

@@ -1,4 +1,4 @@
-{
+  {
   "actors": [
     {
       "name": "sprite",
@@ -15,47 +15,43 @@
       "components": [
         {
           "type": "SpriteRenderer",
-          "texture_name": "textures/sky.png"
+          "texture_name": "textures/bg2.png"
         }
       ]
     },
     {
-      "persistent": true,
+      "name": "sprite",
+      "tag": "background",
+      "persistant": true,
       "transform": {
         "position": [
-          460,
-          640
+          600,
+          600
         ],
         "rotation": 0,
-        "scale": 0.2
+        "scale": 5
       },
       "components": [
         {
           "type": "SpriteRenderer",
-          "texture_name": "textures/tree01.png"
+          "texture_name": "textures/bg1.png"
         }
       ]
     },
-    {
-      "tag": "ground",
-      "persistent": true,
+    {       
+      "persistant": true,
       "transform": {
         "position": [
-          640,
-          900
+          -50,
+          50
         ],
         "rotation": 0,
-        "scale": 0.2
+        "scale": 3
       },
       "components": [
         {
-          "type": "SpriteRenderer",
-          "texture_name": "textures/platform.png"
-        },
-        {
-          "type": "RigidBody",
-          "isDynamic": false,
-          "scale": [ 0.8, 0.5 ]
+          "type": "TilemapRenderer",
+          "tilemap_name": "textures/tileset.json"
         }
       ]
     },
@@ -77,32 +73,6 @@
         },
         {
           "type": "RigidBody"
-        }
-      ]
-    },
-    {
-      "name": "bat",
-      "tag": "enemy",
-      "transform": {
-        "position": [
-          940,
-          212
-        ],
-        "rotation": 0,
-        "scale": 3
-      },
-      "components": [
-        {
-          "type": "SpriteRenderer"
-        },
-        {
-          "type": "Animator",
-          "animations": [
-            {
-              "name": "idle",
-              "texture_animation": "animations/bat_idle.json"
-            }
-          ]
         }
       ]
     }

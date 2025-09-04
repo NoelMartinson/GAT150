@@ -24,7 +24,11 @@ void EnemyController::Update(float dt) {
 }
 
 void EnemyController::OnCollision(fox::Actor* other) {
-}
+	if (other->tag == "player") {
+		owner->destroyed = true;
+		EVENT_NOTIFY_DATA(add_points, 50);
+	}
+}	
 
 void EnemyController::Read(const fox::json::value_t& value) {
 	Object::Read(value);

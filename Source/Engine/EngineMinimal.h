@@ -71,6 +71,7 @@
 #include "Components/MeshRenderer.h"
 #include "Components/AudioSource.h"
 #include "Components/Animator.h"
+#include "Components/TilemapRenderer.h"
 
 
 //audio
@@ -88,3 +89,4 @@
 #include "Renderer/Text.h"
 #include "Renderer/ParticleSystem.h"
 #include "Renderer/TextureAnimation.h"
+#include "Renderer/Tilemap.h"

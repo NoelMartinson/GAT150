@@ -22,9 +22,16 @@ void PlayerController::Update(float dt){
 	if (fox::GetEngine().GetInput().GetKeyDown(SDL_SCANCODE_SPACE)) {
 		rigidBody->ApplyForce(fox::vec2{ 0, -1 } * jump);
 	}
+
+	auto spriteRenderer = owner->GetComponent<fox::SpriteRenderer>();
+	if (spriteRenderer) {
+		if (fox::math::fabs(rigidBody->velocity.x) > 0)
+			spriteRenderer->flipH = (rigidBody->velocity.x < 0);
+	}
 }
 
 void PlayerController::OnCollision(fox::Actor* other){
+	std::cout << other->name << std::endl;
 }
 
 void PlayerController::Read(const fox::json::value_t& value){

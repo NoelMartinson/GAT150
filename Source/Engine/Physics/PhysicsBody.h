@@ -39,7 +39,9 @@ namespace fox {
 
 		void ApplyForce(const vec2& force);
 		void ApplyTorque(float radians);
+
 		void SetVelocity(const vec2& velocity);
+		vec2 GetVelocity();
 
 	private:
 		b2BodyId bodyId{ b2_nullBodyId };

@@ -3,8 +3,8 @@
 
 class EnemyController : public fox::Component, public fox::ICollidable {
 public:
-	float speed = 0;
-	float maxSpeed = 0;
+	float speed = 500;
+	float maxSpeed = 600;
 	float jump = 0;
 	float fireTime = 0.2f;
 	float fireTimer = 0.0f;

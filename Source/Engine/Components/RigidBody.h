@@ -24,6 +24,7 @@ namespace fox {
 
 		void ApplyForce(const vec2& force);
 		void ApplyTorque(float radians);
+
 		void SetVelocity(const vec2& velocity);
 
 	private:

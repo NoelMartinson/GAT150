@@ -9,6 +9,7 @@ namespace fox {
 		std::string textureName;
 		fox::rect textureRect;
 		res_t<Texture> texture;
+		bool flipH{ false };
 
 	public:
 		CLASS_PROTOTYPE(SpriteRenderer)

@@ -14,18 +14,6 @@ int main(int argc, char* argv[]) {
     // Initialize Game
 	std::unique_ptr<fox::Game> game = std::make_unique<PlatformerGame>();
 	game->Initialize();
-	    
-    // Create stars
-	std::vector<fox::vec2> stars; 
-    for (int i = 0; i < 100; i++) {
-        stars.push_back(fox::vec2{ fox::random::getReal() * 1280, fox::random::getReal() * 1024 });
-    }
-
-    //Load Font
-	fox::Font* font = new fox::Font();
-    font->Load("arcadeclassic.ttf", 20);
-
-    //auto background = fox::Resources().Get<fox::Texture>("Textures/space-was-cool.png", fox::GetEngine().GetRenderer());
 
     float screenW = (float)fox::GetEngine().GetRenderer().GetWidth();
     float screenH = (float)fox::GetEngine().GetRenderer().GetHeight();

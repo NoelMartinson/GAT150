@@ -30,8 +30,7 @@ namespace fox {
 		owner->transform.position = physicsBody->GetPosition();
 		owner->transform.rotation = math::radToDeg(physicsBody->GetAngle());
 
-		//owner->transform.position += velocity * dt;
-		//velocity *= (1.0f / (1.0f + dampening * dt));
+		velocity = physicsBody->GetVelocity();
 	}
 
 	void RigidBody::Read(const json::value_t& value) {

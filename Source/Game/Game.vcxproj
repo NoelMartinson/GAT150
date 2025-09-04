@@ -187,6 +187,8 @@
     <ClCompile Include="Game\SpaceGame.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Platformer\EnemyController.cpp" />
+    <ClCompile Include="Platformer\FlyingEnemyController.cpp" />
+    <ClCompile Include="Platformer\Pickup.cpp" />
     <ClCompile Include="Platformer\PlatformerGame.cpp" />
     <ClCompile Include="Platformer\PlayerController.cpp" />
   </ItemGroup>
@@ -204,14 +206,18 @@
     <ClInclude Include="Game\Rocket.h" />
     <ClInclude Include="Game\SpaceGame.h" />
     <ClInclude Include="Platformer\EnemyController.h" />
+    <ClInclude Include="Platformer\FlyingEnemyController.h" />
+    <ClInclude Include="Platformer\Pickup.h" />
     <ClInclude Include="Platformer\PlatformerGame.h" />
     <ClInclude Include="Platformer\PlayerController.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Build\Mesh\enemy.msh" />
     <None Include="..\..\Build\Platformer\Animations\bat_idle.json" />
+    <None Include="..\..\Build\Platformer\Animations\coin.json" />
     <None Include="..\..\Build\Platformer\Scenes\level.json" />
     <None Include="..\..\Build\Platformer\Scenes\prototype.json" />
+    <None Include="..\..\Build\Platformer\Textures\tileset.json" />
     <None Include="..\..\Build\scene.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -28,9 +28,9 @@ namespace fox {
 		int GetHeight() const { return m_height; }  
 
 		void DrawTexture(class Texture& texture, float x, float y, float angle = 0.0f);
-        void DrawTexture(class Texture& texture, float x, float y, float angle = 0.0f, float scale = 0.1f);
+        void DrawTexture(class Texture& texture, float x, float y, float angle = 0.0f, float scale = 0.1f, bool flipH = false);
         void DrawTextureBG(class Texture* texture, float x, float y, float angle = 0.0f);
-		void DrawTexture(class Texture& texture, const fox::rect& sourceRect, float x, float y, float angle, float scale = 1);
+		void DrawTexture(class Texture& texture, const fox::rect& sourceRect, float x, float y, float angle, float scale = 1, bool flipH = false);
 
 		private:
 		friend class Text;  

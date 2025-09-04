@@ -23,6 +23,9 @@ namespace fox {
 		static float pixelsPerUnit;
 
 	private:
+		void ProcessCollisionEvents();
+
+	private:
 		friend class PhysicsBody;
 
 		b2WorldId worldId;

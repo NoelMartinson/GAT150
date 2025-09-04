@@ -33,6 +33,7 @@ public:
 private:
 	void SpawnPlayer();
 	void SpawnEnemy();
+	void SpawnPickup();
 
 private:
 	GameState gameState = GameState::Initalize;

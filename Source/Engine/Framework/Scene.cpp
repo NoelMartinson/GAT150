@@ -14,7 +14,7 @@ namespace fox {
 			return (actor->destroyed);
 		});		
 
-		for (auto& actorA : actors) {
+		/*for (auto& actorA : actors) {
 			for (auto& actorB : actors) {
 
 				continue;
@@ -31,7 +31,7 @@ namespace fox {
 					actorB->OnCollision(actorA.get());
 				}			
 			}
-		}
+		}*/
 	};
 
 	void Scene::Draw(Renderer& renderer) {

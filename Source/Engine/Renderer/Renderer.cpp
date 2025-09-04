@@ -88,7 +88,7 @@ namespace fox
 
         SDL_RenderTexture(renderer, texture.texture, NULL, &destRect);
     }
-    void Renderer::DrawTexture(Texture& texture, float x, float y, float angle, float scale)
+    void Renderer::DrawTexture(Texture& texture, float x, float y, float angle, float scale, bool flipH)
     {
         vec2 size = texture.GetSize();
 
@@ -98,7 +98,7 @@ namespace fox
         destRect.x = x - (destRect.w * 0.5f);
         destRect.y = y - (destRect.h * 0.5f);
 
-        SDL_RenderTextureRotated(renderer, texture.texture, NULL, &destRect, angle, NULL, SDL_FLIP_NONE);
+        SDL_RenderTextureRotated(renderer, texture.texture, NULL, &destRect, angle, NULL, (flipH ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE));
     }
     void Renderer::DrawTextureBG(Texture* texture, float x, float y, float angle)
     {
@@ -106,7 +106,7 @@ namespace fox
         SDL_RenderTextureRotated(renderer, texture->texture, nullptr, &dest, angle, nullptr, SDL_FLIP_NONE);
     }
     
-    void fox::Renderer::DrawTexture(Texture& texture, const rect& sourceRect, float x, float y, float angle, float scale){
+    void fox::Renderer::DrawTexture(Texture& texture, const rect& sourceRect, float x, float y, float angle, float scale, bool flipH){
         SDL_FRect srcRect;
         srcRect.x = sourceRect.x;
         srcRect.y = sourceRect.y;
@@ -119,7 +119,7 @@ namespace fox
         destRect.x = x - destRect.w * 0.5f;
         destRect.y = y - destRect.h * 0.5f;
 
-        SDL_RenderTextureRotated(renderer, texture.texture, &srcRect, &destRect, angle, NULL, SDL_FLIP_NONE);
-        
+        SDL_RenderTextureRotated(renderer, texture.texture, &srcRect, &destRect, angle, NULL, (flipH ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE));
+
     }
 }
